@@ -1,0 +1,24 @@
+stages:
+  - test
+  - build
+  - deploy
+
+test-server:
+  stage: test
+  image: golang:1.16.4-alpine3.13
+  variables:
+    POSTGRES_DB: gomo
+    POSTGRES_USER: gomo-user
+    POSTGRES_PASSWORD: gomo-pass
+  services:
+    - postgres:10.4-alpine
+  before_script:
+    - apk add bash --no-cache
+    - apk add libc-dev --no-cache
+    - apk add gcc --no-cache
+    - apk add git --no-cache
+    - apk add postgresql-client --no-cache
+  script:
+    - cd server
+    - ./script/test-ci
+    - cd -

@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+echo
+echo "=> Test service"
+echo
+
+# specific service
+TEST_SERVICE=""
+if [ -n "$1" ]; then
+    TEST_SERVICE=$1
+    shift
+fi
+
+# environment
+source ${BASH_SOURCE%/*}/environment || exit $?
+
+dir="service"
+for f in "$dir"/*; do
+
+    if [ "$TEST_SERVICE" != "" ]; then
+        if [ "service/$TEST_SERVICE" != "$f" ]; then
+            echo "=> Test service - skipping $f"
+            continue
+        fi
+    fi
+
+    echo "=> Test service - $f"
+
+    cd $f
+    export APP_SERVER_HOME=$(pwd)
+    echo "=> Test service - APP_SERVER_HOME - ${APP_SERVER_HOME}"
+
+    if [ $APP_SERVER_DB_SERVICE = "ci" ]; then
+        if [ -f ".env.ci" ]; then
+            echo "=> Test service - sourcing service .env.ci"
+            source .env.ci
+        fi
+    else
+        if [ -f ".env.development" ]; then
+            echo "=> Test service - sourcing service .env.development"
+            source .env.development
+        fi
+    fi
+    if [ -f "go.mod" ]; then
+        go test -v -cover -count 1 ./... || exit $?
+    fi
+    cd -
+done
+

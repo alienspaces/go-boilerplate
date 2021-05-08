@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+echo
+echo "=> Test core"
+echo
+
+# "docker" or "local"
+export APP_SERVER_DB_SERVICE=docker
+if [ -n "$1" ]; then
+    export APP_SERVER_DB_SERVICE=$1
+    shift
+fi
+
+# environment
+source ${BASH_SOURCE%/*}/environment || exit $?
+
+dir="core"
+for f in "$dir"/*; do
+    echo "=> Test core - $f"
+    cd $f
+    if [ -f "go.mod" ]; then
+        go test -cover -count 1 ./... || exit $?
+    fi
+    cd -
+done
+
+dir="core/type"
+for f in "$dir"/*; do
+    echo "=> Test core - $f"
+    cd $f
+    if [ -f "go.mod" ]; then
+        go test -cover -count 1 ./... || exit $?
+    fi
+    cd -
+done

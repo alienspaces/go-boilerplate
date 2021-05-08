@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gomo-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: nginx-private
+    cert-manager.io/cluster-issuer: "letsencrypt-route53"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /api/templates
+        backend:
+          serviceName: gomo-template-service
+          servicePort: 8080
+  tls:
+  - hosts:
+      - holymagingmages.com
+    secretName: gomo-cert
+
