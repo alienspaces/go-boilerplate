@@ -1,0 +1,23 @@
+# Environment files
+.env
+.env.local
+.env.production
+**/*.yml-e
+
+# Editor
+.vscode
+
+# Notes
+note/*
+notes/*
+NOTES.md
+
+# Binaries
+gomo-template-server
+gomo-template-cli
+
+gomo-account-server
+gomo-account-cli
+
+gomo-character-server
+gomo-character-cli

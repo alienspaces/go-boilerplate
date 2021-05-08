@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Opens a psql session to the database specified in current APP environment
+# \l              - list schemas
+# \c gomo-template - connect to schema
+
+# environment
+if [ -z "$APP_SERVER_GO_VERSION" ]; then
+    source ${BASH_SOURCE%/*}/environment || exit $?
+fi
+
+if [ $status -ne 0 ]; then
+    echo "Establishing environment error, cannot continue" >&2
+    exit $status
+fi
+
+export PGPASSWORD=$APP_SERVER_DB_PASSWORD
+psql --host=$APP_SERVER_DB_HOST \
+     --port=$APP_SERVER_DB_PORT \
+     --username=$APP_SERVER_DB_USER \
+     $APP_SERVER_DB_NAME

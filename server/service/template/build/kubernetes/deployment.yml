@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gomo-template-deployment
+spec:
+  selector:
+    matchLabels:
+      app: gomo-template
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: gomo-template
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - gomo-template
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: gomo-template-container
+          image: {APP_IMAGE}
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "50Mi"
+              cpu: "0.05"
+            limits:
+              memory: "250Mi"
+              cpu: "0.25"
+          envFrom:
+            - configMapRef:
+                name: gomo-template-configmap
+          ports:
+            - containerPort: 8080

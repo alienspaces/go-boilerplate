@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# environment
+if [ -z "$APP_SERVER_GO_VERSION" ]; then
+    source ${BASH_SOURCE%/*}/environment || exit $?
+fi
+
+# retry
+source ${BASH_SOURCE%/*}/retry || exit $?
+
+# "docker" or "local"
+export APP_SERVER_DB_SERVICE=docker
+if [ -n "$1" ]; then
+    export APP_SERVER_DB_SERVICE=$1
+    shift
+fi
+
+# stop database
+echo "=> Stopping database";
+
+if [ $APP_SERVER_DB_SERVICE = "docker" ]; then
+
+    echo "=> Stopping database docker service"
+
+    docker ps -a | grep gomo | awk '{print $1}' | xargs sh -c 'for arg do docker stop $arg; docker rm $arg; done' _
+
+elif [ $APP_SERVER_DB_SERVICE = "local" ]; then
+
+    echo "=> Stopping database local service"
+
+    sudo -u postgres dropdb gomo
+    sudo -u postgres dropuser gomo
+    sudo service postgresql stop
+fi
