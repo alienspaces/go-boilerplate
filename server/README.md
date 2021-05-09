@@ -1,6 +1,6 @@
-# Holy Raging Mages - Server
+# Go Mono API Boilerplate - Server
 
-Server application for the [Holy Raging Mages](https://go-mono-api-boilerplate.com) game.
+Server application for the [Go Mono API Boilerplate](https://go-mono-api-boilerplate.com) game.
 
 ## Start
 
@@ -10,11 +10,10 @@ Start all services
 ./script/start
 ```
 
-## API Documentation
+## Examples API Documentation
 
 * [Player](http://localhost:8082/players/documentation)
-* [Characters](http://localhost:8082/entities/documentation)
-* [Spells](http://localhost:8082/spells/documentation)
+* [Characters](http://localhost:8082/characters/documentation)
 
 ## Stop
 
@@ -22,28 +21,6 @@ Stop all services
 
 ```bash
 ./script/stop
-```
-
-## Technical
-
-Server
-
-* Separate domain oriented services
-  * Go
-  * Postgres
-* Player creation with OAuth/third party providers only
-
-```plantuml
-left to right direction
-[Public API] ..> [Mage]
-[Public API] ..> [Item]
-[Public API] ..> [Spell]
-[Public API] ..> [Fight]
-[Public API] ..> [Tactic]
-[Fight] ..> [Mage]
-[Fight] ..> [Spell]
-[Fight] ..> [Item]
-[Fight] ..> [Tactic]
 ```
 
 ## License
