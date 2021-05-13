@@ -5,27 +5,27 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/modeller"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/schema"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/model"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/modeller"
+	"gitlab.com/alienspaces/go-boilerplate/server/schema"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/record"
 )
 
 // GetPlayersHandler -
 func (rnr *Runner) GetPlayersHandler(w http.ResponseWriter, r *http.Request, pp httprouter.Params, qp map[string]interface{}, l logger.Logger, m modeller.Modeller) {
 
-	l.Info("** Get accounts handler ** p >%#v< m >%#v<", pp, m)
+	l.Info("** Get players handler ** p >%#v< m >%#v<", pp, m)
 
 	var recs []*record.Player
 	var err error
 
-	id := pp.ByName("account_id")
+	id := pp.ByName("player_id")
 
 	// single resource
 	if id != "" {
 
-		l.Info("Getting account record ID >%s<", id)
+		l.Info("Getting player record ID >%s<", id)
 
 		rec, err := m.(*model.Model).GetPlayerRec(id, false)
 		if err != nil {
@@ -43,7 +43,7 @@ func (rnr *Runner) GetPlayersHandler(w http.ResponseWriter, r *http.Request, pp 
 
 	} else {
 
-		l.Info("Querying account records")
+		l.Info("Querying player records")
 
 		params := make(map[string]interface{})
 		for paramName, paramValue := range qp {
@@ -85,10 +85,10 @@ func (rnr *Runner) GetPlayersHandler(w http.ResponseWriter, r *http.Request, pp 
 // PostPlayersHandler -
 func (rnr *Runner) PostPlayersHandler(w http.ResponseWriter, r *http.Request, pp httprouter.Params, qp map[string]interface{}, l logger.Logger, m modeller.Modeller) {
 
-	l.Info("** Post accounts handler ** p >%#v< m >#%v<", pp, m)
+	l.Info("** Post players handler ** p >%#v< m >#%v<", pp, m)
 
 	// parameters
-	id := pp.ByName("account_id")
+	id := pp.ByName("player_id")
 
 	req := schema.PlayerRequest{}
 
@@ -140,10 +140,10 @@ func (rnr *Runner) PostPlayersHandler(w http.ResponseWriter, r *http.Request, pp
 // PutPlayersHandler -
 func (rnr *Runner) PutPlayersHandler(w http.ResponseWriter, r *http.Request, pp httprouter.Params, qp map[string]interface{}, l logger.Logger, m modeller.Modeller) {
 
-	l.Info("** Put accounts handler ** p >%#v< m >#%v<", pp, m)
+	l.Info("** Put players handler ** p >%#v< m >#%v<", pp, m)
 
 	// parameters
-	id := pp.ByName("account_id")
+	id := pp.ByName("player_id")
 
 	l.Info("Updating resource ID >%s<", id)
 
@@ -213,16 +213,16 @@ func (rnr *Runner) PlayerRequestDataToRecord(data schema.PlayerData, rec *record
 }
 
 // RecordToPlayerResponseData -
-func (rnr *Runner) RecordToPlayerResponseData(accountRec *record.Player) (schema.PlayerData, error) {
+func (rnr *Runner) RecordToPlayerResponseData(playerRec *record.Player) (schema.PlayerData, error) {
 
 	data := schema.PlayerData{
-		ID:                accountRec.ID,
-		Name:              accountRec.Name,
-		Email:             accountRec.Email,
-		Provider:          accountRec.Provider,
-		ProviderPlayerID: accountRec.ProviderPlayerID,
-		CreatedAt:         accountRec.CreatedAt,
-		UpdatedAt:         accountRec.UpdatedAt.Time,
+		ID:               playerRec.ID,
+		Name:             playerRec.Name,
+		Email:            playerRec.Email,
+		Provider:         playerRec.Provider,
+		ProviderPlayerID: playerRec.ProviderPlayerID,
+		CreatedAt:        playerRec.CreatedAt,
+		UpdatedAt:        playerRec.UpdatedAt.Time,
 	}
 
 	return data, nil

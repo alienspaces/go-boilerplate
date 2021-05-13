@@ -4,13 +4,13 @@ import (
 	"database/sql"
 	"fmt"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/record"
 )
 
 // GetPlayerRoleRecs -
 func (m *Model) GetPlayerRoleRecs(params map[string]interface{}, operators map[string]string, forUpdate bool) ([]*record.PlayerRole, error) {
 
-	m.Log.Info("Getting account records params >%s<", params)
+	m.Log.Info("Getting player records params >%s<", params)
 
 	r := m.PlayerRoleRepository()
 
@@ -20,7 +20,7 @@ func (m *Model) GetPlayerRoleRecs(params map[string]interface{}, operators map[s
 // GetPlayerRoleRec -
 func (m *Model) GetPlayerRoleRec(recID string, forUpdate bool) (*record.PlayerRole, error) {
 
-	m.Log.Info("Getting account rec ID >%s<", recID)
+	m.Log.Info("Getting player rec ID >%s<", recID)
 
 	r := m.PlayerRoleRepository()
 
@@ -41,7 +41,7 @@ func (m *Model) GetPlayerRoleRec(recID string, forUpdate bool) (*record.PlayerRo
 // CreatePlayerRoleRec -
 func (m *Model) CreatePlayerRoleRec(rec *record.PlayerRole) error {
 
-	m.Log.Info("Creating account rec >%v<", rec)
+	m.Log.Info("Creating player rec >%v<", rec)
 
 	r := m.PlayerRoleRepository()
 
@@ -57,7 +57,7 @@ func (m *Model) CreatePlayerRoleRec(rec *record.PlayerRole) error {
 // UpdatePlayerRoleRec -
 func (m *Model) UpdatePlayerRoleRec(rec *record.PlayerRole) error {
 
-	m.Log.Info("Updating account rec >%v<", rec)
+	m.Log.Info("Updating player rec >%v<", rec)
 
 	r := m.PlayerRoleRepository()
 
@@ -73,7 +73,7 @@ func (m *Model) UpdatePlayerRoleRec(rec *record.PlayerRole) error {
 // DeletePlayerRoleRec -
 func (m *Model) DeletePlayerRoleRec(recID string) error {
 
-	m.Log.Info("Deleting account rec ID >%s<", recID)
+	m.Log.Info("Deleting player rec ID >%s<", recID)
 
 	r := m.PlayerRoleRepository()
 
@@ -94,7 +94,7 @@ func (m *Model) DeletePlayerRoleRec(recID string) error {
 // RemovePlayerRoleRec -
 func (m *Model) RemovePlayerRoleRec(recID string) error {
 
-	m.Log.Info("Removing account rec ID >%s<", recID)
+	m.Log.Info("Removing player rec ID >%s<", recID)
 
 	r := m.PlayerRoleRepository()
 

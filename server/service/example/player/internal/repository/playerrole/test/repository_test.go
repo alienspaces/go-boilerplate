@@ -9,9 +9,9 @@ import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/harness"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/model"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/harness"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/record"
 )
 
 func TestCreateOne(t *testing.T) {
@@ -41,7 +41,7 @@ func TestCreateOne(t *testing.T) {
 			rec: func(data *harness.Data) *record.PlayerRole {
 				return &record.PlayerRole{
 					PlayerID: data.PlayerRecs[0].ID,
-					Role:      record.PlayerRoleDefault,
+					Role:     record.PlayerRoleDefault,
 				}
 			},
 			err: false,
@@ -51,7 +51,7 @@ func TestCreateOne(t *testing.T) {
 			rec: func(data *harness.Data) *record.PlayerRole {
 				rec := &record.PlayerRole{
 					PlayerID: data.PlayerRecs[0].ID,
-					Role:      record.PlayerRoleAdministrator,
+					Role:     record.PlayerRoleAdministrator,
 				}
 				id, _ := uuid.NewRandom()
 				rec.ID = id.String()

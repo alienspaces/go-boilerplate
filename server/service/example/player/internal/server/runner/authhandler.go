@@ -5,12 +5,12 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/constant"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/auth"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/modeller"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/schema"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/constant"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/auth"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/modeller"
+	"gitlab.com/alienspaces/go-boilerplate/server/schema"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/model"
 )
 
 // PostAuthHandler -
@@ -27,9 +27,9 @@ func (rnr *Runner) PostAuthHandler(w http.ResponseWriter, r *http.Request, pp ht
 	}
 
 	accountRec, err := m.(*model.Model).AuthVerify(model.AuthData{
-		Provider:          req.Data.Provider,
+		Provider:         req.Data.Provider,
 		ProviderPlayerID: req.Data.ProviderPlayerID,
-		ProviderToken:     req.Data.ProviderToken,
+		ProviderToken:    req.Data.ProviderToken,
 		PlayerEmail:      req.Data.PlayerEmail,
 		PlayerName:       req.Data.PlayerName,
 	})
@@ -68,15 +68,15 @@ func (rnr *Runner) PostAuthHandler(w http.ResponseWriter, r *http.Request, pp ht
 	res := schema.AuthResponse{
 		Data: []schema.AuthData{
 			{
-				Provider:          req.Data.Provider,
+				Provider:         req.Data.Provider,
 				ProviderPlayerID: req.Data.ProviderPlayerID,
-				ProviderToken:     req.Data.ProviderToken,
+				ProviderToken:    req.Data.ProviderToken,
 				PlayerID:         accountRec.ID,
 				PlayerName:       accountRec.Name,
 				PlayerEmail:      accountRec.Email,
-				Token:             tokenString,
-				CreatedAt:         accountRec.CreatedAt,
-				UpdatedAt:         accountRec.UpdatedAt.Time,
+				Token:            tokenString,
+				CreatedAt:        accountRec.CreatedAt,
+				UpdatedAt:        accountRec.UpdatedAt.Time,
 			},
 		},
 	}

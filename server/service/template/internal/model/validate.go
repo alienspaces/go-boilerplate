@@ -1,7 +1,7 @@
 package model
 
 import (
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/template/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/template/internal/record"
 )
 
 // ValidateTemplateRec - validates creating and updating a template record

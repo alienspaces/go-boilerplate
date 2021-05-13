@@ -3,7 +3,7 @@ package runner
 import (
 	"github.com/urfave/cli/v2"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/template/internal/harness"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/template/internal/harness"
 )
 
 // LoadSeedData -

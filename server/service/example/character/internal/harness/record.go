@@ -4,8 +4,8 @@ import (
 	"github.com/brianvoe/gofakeit/v5"
 	"github.com/google/uuid"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/model"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/record"
 )
 
 func (t *Testing) createCharacterRec(entityConfig CharacterConfig) (record.Character, error) {

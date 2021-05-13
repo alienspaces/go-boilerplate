@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gomo-character-deployment
+  name: go-boilerplate-character-deployment
 spec:
   selector:
     matchLabels:
-      app: gomo-character
+      app: go-boilerplate-character
   replicas: 1
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: gomo-character
+        app: go-boilerplate-character
     spec:
       affinity:
         podAntiAffinity:
@@ -22,10 +22,10 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - gomo-character
+                      - go-boilerplate-character
               topologyKey: "kubernetes.io/hostname"
       containers:
-        - name: gomo-character-container
+        - name: go-boilerplate-character-container
           image: {APP_IMAGE}
           imagePullPolicy: Always
           livenessProbe:
@@ -49,6 +49,6 @@ spec:
               cpu: "0.25"
           envFrom:
             - configMapRef:
-                name: gomo-character-configmap
+                name: go-boilerplate-character-configmap
           ports:
             - containerPort: 8080

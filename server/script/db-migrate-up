@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
+# Local development run script
+
 # environment
-if [ -z "$APP_SERVER_GO_VERSION" ]; then
-    source ${BASH_SOURCE%/*}/environment || exit $?
-fi
+source ${BASH_SOURCE%/*}/environment || exit $?
 
 # go version
 if [ $(command -v gvm) ]; then
@@ -18,27 +18,43 @@ if [[ "$MIGRATE_PATH" != *"$APP_SERVER_GO_VERSION"* ]]; then
     source ${BASH_SOURCE%/*}/db-migrate-install || exit $?
 fi
 
+function migrate_up {
+    for SERVICE_NAME in "${SERVICE_NAMES[@]}"; do
+
+        # run migrations
+        if [ -d "$SERVICE_BASE_PATH/$SERVICE_NAME/migration" ]; then
+
+            # load service specific environment
+            source ${BASH_SOURCE%/*}/environment "$SERVICE_BASE_PATH/$SERVICE_NAME" || exit $?
+
+            URL="postgres://$APP_SERVER_DB_USER:$APP_SERVER_DB_PASSWORD@$APP_SERVER_DB_HOST:$APP_SERVER_DB_PORT/$APP_SERVER_DB_NAME?sslmode=disable"
+
+            echo "=> Migration path $SERVICE_BASE_PATH/$SERVICE_NAME/migration"
+
+            migrate -verbose -path "$SERVICE_BASE_PATH/$SERVICE_NAME/migration" -database "$URL" -- up
+        fi
+    done
+}
+
 # service directory list
 shopt -s dotglob
 shopt -s nullglob
-cd ./service
+
+SERVICE_BASE_PATH=./service
+cd $SERVICE_BASE_PATH
 SERVICE_NAMES=(*)
 cd -
 
-for SERVICE_NAME in "${SERVICE_NAMES[@]}"; do
+migrate_up
 
-    # run migrations
-    if [ -d "./service/$SERVICE_NAME/migration" ]; then
+# Service example directory list
+if [[ "$APP_SERVER_ENABLE_EXAMPLES" == 1 ]]; then
+    echo " => Migrating example services"
 
-        # load service specific environment
-        source ${BASH_SOURCE%/*}/environment ./service/$SERVICE_NAME || exit $?
+    SERVICE_BASE_PATH=./service/example
+    cd $SERVICE_BASE_PATH
+    SERVICE_NAMES=(*)
+    cd -
 
-        URL="postgres://$APP_SERVER_DB_USER:$APP_SERVER_DB_PASSWORD@$APP_SERVER_DB_HOST:$APP_SERVER_DB_PORT/$APP_SERVER_DB_NAME?sslmode=disable"
-
-        echo "=> Migration path ./service/$SERVICE_NAME/migration"
-
-        migrate -verbose -path "./service/$SERVICE_NAME/migration" -database "$URL" -- up
-    fi
-done
-
-
+    migrate_up
+fi

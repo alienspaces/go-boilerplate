@@ -1,7 +1,7 @@
 package record
 
 import (
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/repository"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/repository"
 )
 
 // Template -

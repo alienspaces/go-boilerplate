@@ -1,6 +1,6 @@
 # Go Mono API Boilerplate - Server
 
-Server application for the [Go Mono API Boilerplate](https://go-mono-api-boilerplate.com) game.
+Server application for the [Go Mono API Boilerplate](https://go-boilerplate.com) game.
 
 ## Start
 

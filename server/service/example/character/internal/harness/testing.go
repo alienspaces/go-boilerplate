@@ -1,10 +1,10 @@
 package harness
 
 import (
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/harness"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/modeller"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/model"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/harness"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/modeller"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/record"
 )
 
 // Testing -

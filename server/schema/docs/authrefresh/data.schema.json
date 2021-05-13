@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft-07/schema#",
-    "$id": "http://go-mono-api-boilerplate.com/schema/authrefresh/data.schema.json",
+    "$id": "http://go-boilerplate.com/schema/authrefresh/data.schema.json",
     "title": "Auth Token Refresh Data",
     "description": "Payload data for authentication token refresh",
     "type": "object",

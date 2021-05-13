@@ -13,12 +13,12 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/stretchr/testify/require"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/constant"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/auth"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/server"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/schema"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/harness"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/constant"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/auth"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/server"
+	"gitlab.com/alienspaces/go-boilerplate/server/schema"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/harness"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/record"
 )
 
 func TestCharacterHandler(t *testing.T) {

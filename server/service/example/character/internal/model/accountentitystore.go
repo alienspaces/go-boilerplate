@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/record"
 )
 
 // GetPlayerCharacterRecs -

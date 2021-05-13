@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Local development run script
+
 # environment
 if [ -z "$APP_SERVER_GO_VERSION" ]; then
     source ${BASH_SOURCE%/*}/environment || exit $?
@@ -43,7 +45,7 @@ function start_services {
             fi
 
             # Build server
-            SERVER_NAME="gomo-${SERVICE_NAME}-server"
+            SERVER_NAME="go-boilerplate-${SERVICE_NAME}-server"
             rm -f $SERVER_NAME
             go build -o $SERVER_NAME ./cmd/server
 

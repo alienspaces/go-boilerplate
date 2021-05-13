@@ -9,9 +9,9 @@ import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/harness"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/model"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/harness"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/record"
 )
 
 func TestCreateOne(t *testing.T) {

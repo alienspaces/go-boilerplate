@@ -1,14 +1,14 @@
-package accountrole
+package playerrole
 
 var createOneSQL = `
-INSERT INTO account_role (
+INSERT INTO player_role (
     id,
-    account_id,
+    player_id,
     role,
     created_at
 ) VALUES (
     :id,
-    :account_id,
+    :player_id,
     :role,
     :created_at
 )
@@ -16,8 +16,8 @@ RETURNING *
 `
 
 var updateOneSQL = `
-UPDATE account_role SET
-    account_id   = :account_id,
+UPDATE player_role SET
+    player_id   = :player_id,
     role         = :role,
     updated_at   = :updated_at
 WHERE id = :id

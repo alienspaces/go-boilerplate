@@ -1,10 +1,10 @@
 package server
 
 import (
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/configurer"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/runnable"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/storer"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/configurer"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/runnable"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/storer"
 )
 
 // Server -

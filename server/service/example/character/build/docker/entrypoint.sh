@@ -8,7 +8,7 @@ if [ -z "$COMMAND" ]; then
 
     # run
     echo "=> (entrypoint) Executing run command"
-    gomo-character-server
+    go-boilerplate-character-server
 
 else
 

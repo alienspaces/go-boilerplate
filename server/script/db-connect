@@ -2,12 +2,10 @@
 
 # Opens a psql session to the database specified in current APP environment
 # \l              - list schemas
-# \c gomo-template - connect to schema
+# \c go-boilerplate-template - connect to schema
 
 # environment
-if [ -z "$APP_SERVER_GO_VERSION" ]; then
-    source ${BASH_SOURCE%/*}/environment || exit $?
-fi
+source ${BASH_SOURCE%/*}/environment || exit $?
 
 if [ $status -ne 0 ]; then
     echo "Establishing environment error, cannot continue" >&2

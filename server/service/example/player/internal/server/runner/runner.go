@@ -3,13 +3,13 @@ package runner
 import (
 	"net/http"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/constant"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/auth"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/server"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/modeller"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/runnable"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/constant"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/auth"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/server"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/modeller"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/runnable"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/model"
 )
 
 // Runner -
@@ -134,9 +134,9 @@ func NewRunner() *Runner {
 					constant.AuthRoleAdministrator,
 				},
 				ValidateSchemaLocation: "player",
-				ValidateSchemaMain:     "player-main.schema.json",
+				ValidateSchemaMain:     "main.schema.json",
 				ValidateSchemaReferences: []string{
-					"player-data.schema.json",
+					"data.schema.json",
 				},
 			},
 			DocumentationConfig: server.DocumentationConfig{
@@ -161,9 +161,9 @@ func NewRunner() *Runner {
 					constant.AuthRoleAdministrator,
 				},
 				ValidateSchemaLocation: "player",
-				ValidateSchemaMain:     "player-main.schema.json",
+				ValidateSchemaMain:     "main.schema.json",
 				ValidateSchemaReferences: []string{
-					"player-data.schema.json",
+					"data.schema.json",
 				},
 			},
 			DocumentationConfig: server.DocumentationConfig{
@@ -188,9 +188,9 @@ func NewRunner() *Runner {
 					constant.AuthRoleAdministrator,
 				},
 				ValidateSchemaLocation: "player",
-				ValidateSchemaMain:     "player-main.schema.json",
+				ValidateSchemaMain:     "main.schema.json",
 				ValidateSchemaReferences: []string{
-					"player-data.schema.json",
+					"data.schema.json",
 				},
 			},
 			DocumentationConfig: server.DocumentationConfig{

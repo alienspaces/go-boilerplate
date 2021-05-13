@@ -5,8 +5,8 @@ import (
 
 	"github.com/jmoiron/sqlx"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/configurer"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/configurer"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
 )
 
 const (

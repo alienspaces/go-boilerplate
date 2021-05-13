@@ -9,9 +9,9 @@ import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/harness"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/model"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/harness"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/record"
 )
 
 func TestCreateOne(t *testing.T) {
@@ -34,9 +34,9 @@ func TestCreateOne(t *testing.T) {
 			name: "Without ID",
 			rec: func() *record.Player {
 				return &record.Player{
-					Name:              "Scary Susan",
-					Email:             "scarysusan@example.com",
-					Provider:          record.PlayerProviderGoogle,
+					Name:             "Scary Susan",
+					Email:            "scarysusan@example.com",
+					Provider:         record.PlayerProviderGoogle,
 					ProviderPlayerID: "abcdefg",
 				}
 			},
@@ -46,9 +46,9 @@ func TestCreateOne(t *testing.T) {
 			name: "With ID",
 			rec: func() *record.Player {
 				rec := &record.Player{
-					Name:              "Horrific Harry",
-					Email:             "horrificharry@example.com",
-					Provider:          record.PlayerProviderGoogle,
+					Name:             "Horrific Harry",
+					Email:            "horrificharry@example.com",
+					Provider:         record.PlayerProviderGoogle,
 					ProviderPlayerID: "abcdefg",
 				}
 				id, _ := uuid.NewRandom()

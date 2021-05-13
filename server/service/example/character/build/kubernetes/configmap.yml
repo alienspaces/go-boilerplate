@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: gomo-character-configmap
+  name: go-boilerplate-character-configmap
   namespace: default
 data:
   APP_SERVER_LOG_LEVEL: {APP_SERVER_LOG_LEVEL}

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: gomo-player-configmap
+  name: go-boilerplate-player-configmap
   namespace: default
 data:
   APP_SERVER_LOG_LEVEL: {APP_SERVER_LOG_LEVEL}

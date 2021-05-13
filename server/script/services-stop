@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Local development run script
+
 echo
 echo "=> Stopping services"
 echo
@@ -7,10 +9,10 @@ echo
 function stop_services {
     for SERVICE_NAME in "${SERVICE_NAMES[@]}"; do
 
-        if [ -f "./service/$SERVICE_NAME/.env" ]; then
+        if [ -f "$SERVICE_BASE_PATH/$SERVICE_NAME/.env" ]; then
 
             # stop server
-            SERVER_NAME="gomo-${SERVICE_NAME}-server"
+            SERVER_NAME="go-boilerplate-${SERVICE_NAME}-server"
 
             echo "=> (stop_services) - Finding process for $SERVER_NAME"
 

@@ -3,14 +3,14 @@ package runner
 import (
 	"net/http"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/constant"
+	"gitlab.com/alienspaces/go-boilerplate/server/constant"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/auth"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/server"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/modeller"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/runnable"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/auth"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/server"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/modeller"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/runnable"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/model"
 )
 
 // Runner -
@@ -32,7 +32,7 @@ func NewRunner() *Runner {
 	r.ModellerFunc = r.Modeller
 
 	r.HandlerConfig = []server.HandlerConfig{
-		// 0 - Get any, Administrator role or Default role, account ID not required
+		// 0 - Get any, Administrator role or Default role, player ID not required
 		{
 			Method:      http.MethodGet,
 			Path:        "/api/characters",
@@ -54,7 +54,7 @@ func NewRunner() *Runner {
 				Description: "Query characters.",
 			},
 		},
-		// 1 - Get with character ID, Administrator role or Default role, account ID not required
+		// 1 - Get with character ID, Administrator role or Default role, player ID not required
 		{
 			Method:      http.MethodGet,
 			Path:        "/api/characters/:character_id",
@@ -73,10 +73,10 @@ func NewRunner() *Runner {
 				Description: "Get an character.",
 			},
 		},
-		// 2 - Get any, Default or Administrator role, accountID required, account ID in path must match idcharacter
+		// 2 - Get any, Default or Administrator role, playerID required, player ID in path must match idcharacter
 		{
 			Method:      http.MethodGet,
-			Path:        "/api/players/:account_id/characters",
+			Path:        "/api/players/:player_id/characters",
 			HandlerFunc: r.GetPlayerCharactersHandler,
 			MiddlewareConfig: server.MiddlewareConfig{
 				AuthTypes: []string{
@@ -90,7 +90,7 @@ func NewRunner() *Runner {
 					constant.AuthIdentityPlayerID,
 				},
 				ValidatePathParams: map[string]server.ValidatePathParam{
-					"account_id": server.ValidatePathParam{
+					"player_id": server.ValidatePathParam{
 						MatchIdentity: true,
 					},
 				},
@@ -103,10 +103,10 @@ func NewRunner() *Runner {
 				Description: "Query characters.",
 			},
 		},
-		// 3 - Get with character ID, Default or Administrator role, accountID required, account ID in path must match idcharacter
+		// 3 - Get with character ID, Default or Administrator role, playerID required, player ID in path must match idcharacter
 		{
 			Method:      http.MethodGet,
-			Path:        "/api/players/:account_id/characters/:character_id",
+			Path:        "/api/players/:player_id/characters/:character_id",
 			HandlerFunc: r.GetPlayerCharactersHandler,
 			MiddlewareConfig: server.MiddlewareConfig{
 				AuthTypes: []string{
@@ -120,7 +120,7 @@ func NewRunner() *Runner {
 					constant.AuthIdentityPlayerID,
 				},
 				ValidatePathParams: map[string]server.ValidatePathParam{
-					"account_id": server.ValidatePathParam{
+					"player_id": server.ValidatePathParam{
 						MatchIdentity: true,
 					},
 				},
@@ -130,10 +130,10 @@ func NewRunner() *Runner {
 				Description: "Get an character.",
 			},
 		},
-		// 4 - Post without character ID, Default or Administrator role, accountID required, account ID in path must match idcharacter
+		// 4 - Post without character ID, Default or Administrator role, playerID required, player ID in path must match idcharacter
 		{
 			Method:      http.MethodPost,
-			Path:        "/api/players/:account_id/characters",
+			Path:        "/api/players/:player_id/characters",
 			HandlerFunc: r.PostPlayerCharactersHandler,
 			MiddlewareConfig: server.MiddlewareConfig{
 				AuthTypes: []string{
@@ -147,7 +147,7 @@ func NewRunner() *Runner {
 					constant.AuthIdentityPlayerID,
 				},
 				ValidatePathParams: map[string]server.ValidatePathParam{
-					"account_id": server.ValidatePathParam{
+					"player_id": server.ValidatePathParam{
 						MatchIdentity: true,
 					},
 				},
@@ -162,10 +162,10 @@ func NewRunner() *Runner {
 				Description: "Create an character.",
 			},
 		},
-		// 5 - Post with character ID, Default or Administrator role, accountID required, account ID in path must match idcharacter
+		// 5 - Post with character ID, Default or Administrator role, playerID required, player ID in path must match idcharacter
 		{
 			Method:      http.MethodPost,
-			Path:        "/api/players/:account_id/characters/:character_id",
+			Path:        "/api/players/:player_id/characters/:character_id",
 			HandlerFunc: r.PostPlayerCharactersHandler,
 			MiddlewareConfig: server.MiddlewareConfig{
 				AuthTypes: []string{
@@ -179,7 +179,7 @@ func NewRunner() *Runner {
 					constant.AuthIdentityPlayerID,
 				},
 				ValidatePathParams: map[string]server.ValidatePathParam{
-					"account_id": server.ValidatePathParam{
+					"player_id": server.ValidatePathParam{
 						MatchIdentity: true,
 					},
 				},
@@ -194,10 +194,11 @@ func NewRunner() *Runner {
 				Description: "Create an character.",
 			},
 		},
-		// 6 - Put with character ID, Default or Administrator role, accountID required, account ID in path must match idcharacter
+		// 6 - Put with character ID, Default or Administrator role, playerID required, player ID in
+		// path must match idcharacter
 		{
 			Method:      http.MethodPut,
-			Path:        "/api/players/:account_id/characters/:character_id",
+			Path:        "/api/players/:player_id/characters/:character_id",
 			HandlerFunc: r.PutPlayerCharactersHandler,
 			MiddlewareConfig: server.MiddlewareConfig{
 				AuthTypes: []string{
@@ -211,7 +212,7 @@ func NewRunner() *Runner {
 					constant.AuthIdentityPlayerID,
 				},
 				ValidatePathParams: map[string]server.ValidatePathParam{
-					"account_id": server.ValidatePathParam{
+					"player_id": server.ValidatePathParam{
 						MatchIdentity: true,
 					},
 				},

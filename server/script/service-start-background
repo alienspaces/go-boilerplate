@@ -3,6 +3,8 @@
 # Starts a service running in the background.
 # To stop the service run ./script/services-stop-background [service name]
 
+# Local development run script
+
 SERVICE_NAME=$1
 if [ -z "${SERVICE_NAME}" ]; then
     echo "=> (start service) Missing service name, cannot start service"
@@ -41,7 +43,7 @@ cat .env.local >> .env
 source ../../${BASH_SOURCE%/*}/environment || exit $?
 
 # build server
-SERVER_NAME="gomo-${SERVICE_NAME}-server"
+SERVER_NAME="go-boilerplate-${SERVICE_NAME}-server"
 rm -f $SERVER_NAME
 go build -o $SERVER_NAME ./cmd/server || exit $?
 

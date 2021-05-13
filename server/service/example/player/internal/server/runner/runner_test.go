@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/harness"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/harness"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/record"
 )
 
 func NewTestHarness() (*harness.Testing, error) {

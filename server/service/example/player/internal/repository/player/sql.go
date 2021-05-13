@@ -1,30 +1,30 @@
-package account
+package player
 
 var createOneSQL = `
-INSERT INTO account (
+INSERT INTO player (
     id,
     name,
     email,
     provider,
-    provider_account_id,
+    provider_player_id,
     created_at
 ) VALUES (
     :id,
     :name,
     :email,
     :provider,
-    :provider_account_id,
+    :provider_player_id,
     :created_at
 )
 RETURNING *
 `
 
 var updateOneSQL = `
-UPDATE account SET
+UPDATE player SET
     name                = :name,
     email               = :email,
     provider            = :provider,
-    provider_account_id = :provider_account_id,
+    provider_player_id = :provider_player_id,
     updated_at          = :updated_at
 WHERE id = :id
 AND   deleted_at IS NULL

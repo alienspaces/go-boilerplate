@@ -3,8 +3,8 @@ package runner
 import (
 	"github.com/urfave/cli/v2"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/harness"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/harness"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/record"
 )
 
 // LoadSeedData -

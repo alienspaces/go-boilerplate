@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
+# Local development run script
+
+# copy development env
+cp .env.development .env
+
 # environment
-if [ -z "$APP_SERVER_GO_VERSION" ]; then
-    source ${BASH_SOURCE%/*}/environment || exit $?
-fi
+source ${BASH_SOURCE%/*}/environment || exit $?
 
 # retry
 source ${BASH_SOURCE%/*}/retry || exit $?
@@ -18,7 +21,7 @@ if [ $APP_SERVER_DB_SERVICE = "docker" ]; then
 
     echo "=> Start database - docker service"
 
-    docker run --hostname postgres --name gomo-postgres \
+    docker run --hostname postgres --name go-boilerplate-postgres \
     -e POSTGRES_USER=$APP_SERVER_DB_USER \
     -e POSTGRES_PASSWORD=$APP_SERVER_DB_PASSWORD \
     -e POSTGRES_DB=$APP_SERVER_DB_NAME \

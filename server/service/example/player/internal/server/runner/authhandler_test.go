@@ -13,12 +13,12 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/stretchr/testify/require"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/server"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/modeller"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/schema"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/harness"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/server"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/modeller"
+	"gitlab.com/alienspaces/go-boilerplate/server/schema"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/harness"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/model"
 )
 
 func TestAuthHandler(t *testing.T) {

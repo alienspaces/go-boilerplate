@@ -1,4 +1,4 @@
-module gitlab.com/alienspaces/go-mono-api-boilerplate/server/constant
+module gitlab.com/alienspaces/go-boilerplate/server/constant
 
 go 1.15
 

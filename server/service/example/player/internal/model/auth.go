@@ -7,16 +7,16 @@ import (
 	"google.golang.org/api/oauth2/v1"
 	"google.golang.org/api/option"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/constant"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/auth"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/constant"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/auth"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/record"
 )
 
 // AuthData - encapsulates data provided by an authorizer
 type AuthData struct {
-	Provider          string
+	Provider         string
 	ProviderPlayerID string
-	ProviderToken     string
+	ProviderToken    string
 	PlayerEmail      string
 	PlayerName       string
 }
@@ -55,7 +55,7 @@ func (m *Model) AuthVerify(data AuthData) (*record.Player, error) {
 	case record.PlayerProviderAnonymous:
 		// Anonymous verification requires an account ID only
 		if data.ProviderPlayerID == "" {
-			msg := "Missing ProviderPlayerID, cannot verify anonymous authen"
+			msg := "missing ProviderPlayerID, cannot verify anonymous authen"
 			m.Log.Warn(msg)
 			return nil, fmt.Errorf(msg)
 		}
@@ -63,7 +63,7 @@ func (m *Model) AuthVerify(data AuthData) (*record.Player, error) {
 	case record.PlayerProviderGoogle:
 		// Google verification with server to server token verification
 		if data.ProviderPlayerID == "" {
-			msg := "Missing ProviderPlayerID, cannot verify Google authen"
+			msg := "missing ProviderPlayerID, cannot verify Google authen"
 			m.Log.Warn(msg)
 			return nil, fmt.Errorf(msg)
 		}
@@ -79,7 +79,7 @@ func (m *Model) AuthVerify(data AuthData) (*record.Player, error) {
 			return nil, err
 		}
 		if verifiedData == nil {
-			msg := "Failed AuthVerifyTokenFunc, verified data is nil"
+			msg := "failed AuthVerifyTokenFunc, verified data is nil"
 			m.Log.Warn(msg)
 			return nil, fmt.Errorf(msg)
 		}
@@ -97,12 +97,12 @@ func (m *Model) AuthVerify(data AuthData) (*record.Player, error) {
 
 	default:
 		// Unsupported
-		return nil, fmt.Errorf("Unsupported provider >%s<", data.Provider)
+		return nil, fmt.Errorf("unsupported provider >%s<", data.Provider)
 	}
 
 	if verifiedPlayerID == "" {
 		m.Log.Warn("Failed verifying account")
-		return nil, fmt.Errorf("Failed verifying account")
+		return nil, fmt.Errorf("failed verifying account")
 	}
 
 	// Fetch account based on provider and provider account ID
@@ -134,9 +134,9 @@ func (m *Model) AuthVerify(data AuthData) (*record.Player, error) {
 	if len(accountRecs) == 0 {
 		m.Log.Info("Failed getting user account, records >%d<", len(accountRecs))
 		rec = &record.Player{
-			Name:              verifiedPlayerName,
-			Email:             verifiedPlayerEmail,
-			Provider:          data.Provider,
+			Name:             verifiedPlayerName,
+			Email:            verifiedPlayerEmail,
+			Provider:         data.Provider,
 			ProviderPlayerID: verifiedPlayerID,
 		}
 		err := m.CreatePlayerRec(rec)
@@ -227,7 +227,7 @@ func (m *Model) authVerifyToken(provider, token string) (*VerifiedData, error) {
 		verifiedData.Email = tokenInfo.Email
 	default:
 		// Unsupported
-		return nil, fmt.Errorf("Unsupported provider >%s<", provider)
+		return nil, fmt.Errorf("unsupported provider >%s<", provider)
 	}
 
 	return verifiedData, nil

@@ -1,20 +1,20 @@
-package accountrole
+package playerrole
 
 import (
 	"time"
 
 	"github.com/jmoiron/sqlx"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/repository"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/preparer"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/repositor"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/repository"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/preparer"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/repositor"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/record"
 )
 
 const (
 	// TableName - underlying database table name used for configuration
-	TableName string = "account_role"
+	TableName string = "player_role"
 )
 
 // Repository -

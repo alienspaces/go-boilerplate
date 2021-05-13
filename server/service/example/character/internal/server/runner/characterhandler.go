@@ -5,11 +5,11 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/modeller"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/schema"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/model"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/character/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/modeller"
+	"gitlab.com/alienspaces/go-boilerplate/server/schema"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/record"
 )
 
 // GetCharactersHandler -

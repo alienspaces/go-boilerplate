@@ -4,13 +4,13 @@ import (
 	"database/sql"
 	"fmt"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/record"
 )
 
 // GetPlayerRecs -
 func (m *Model) GetPlayerRecs(params map[string]interface{}, operators map[string]string, forUpdate bool) ([]*record.Player, error) {
 
-	m.Log.Info("Getting account records params >%s<", params)
+	m.Log.Info("Getting player records params >%s<", params)
 
 	r := m.PlayerRepository()
 
@@ -20,7 +20,7 @@ func (m *Model) GetPlayerRecs(params map[string]interface{}, operators map[strin
 // GetPlayerRec -
 func (m *Model) GetPlayerRec(recID string, forUpdate bool) (*record.Player, error) {
 
-	m.Log.Info("Getting account rec ID >%s<", recID)
+	m.Log.Info("Getting player rec ID >%s<", recID)
 
 	r := m.PlayerRepository()
 
@@ -41,7 +41,7 @@ func (m *Model) GetPlayerRec(recID string, forUpdate bool) (*record.Player, erro
 // CreatePlayerRec -
 func (m *Model) CreatePlayerRec(rec *record.Player) error {
 
-	m.Log.Info("Creating account rec >%v<", rec)
+	m.Log.Info("Creating player rec >%v<", rec)
 
 	r := m.PlayerRepository()
 
@@ -57,7 +57,7 @@ func (m *Model) CreatePlayerRec(rec *record.Player) error {
 // UpdatePlayerRec -
 func (m *Model) UpdatePlayerRec(rec *record.Player) error {
 
-	m.Log.Info("Updating account rec >%v<", rec)
+	m.Log.Info("Updating player rec >%v<", rec)
 
 	r := m.PlayerRepository()
 
@@ -73,7 +73,7 @@ func (m *Model) UpdatePlayerRec(rec *record.Player) error {
 // DeletePlayerRec -
 func (m *Model) DeletePlayerRec(recID string) error {
 
-	m.Log.Info("Deleting account rec ID >%s<", recID)
+	m.Log.Info("Deleting player rec ID >%s<", recID)
 
 	r := m.PlayerRepository()
 
@@ -94,7 +94,7 @@ func (m *Model) DeletePlayerRec(recID string) error {
 // RemovePlayerRec -
 func (m *Model) RemovePlayerRec(recID string) error {
 
-	m.Log.Info("Removing account rec ID >%s<", recID)
+	m.Log.Info("Removing player rec ID >%s<", recID)
 
 	r := m.PlayerRepository()
 

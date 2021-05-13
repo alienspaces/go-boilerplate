@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Local development run script
+
 SERVICE_NAME=$1
 if [ -z "${SERVICE_NAME}" ]; then
     echo "=> (start service) Missing service name, cannot start service"
@@ -22,7 +24,7 @@ cp .env.development .env
 source ${BASH_SOURCE%/*}/environment || exit $?
 
 # server
-SERVER_NAME="gomo-${SERVICE_NAME}-server"
+SERVER_NAME="go-boilerplate-${SERVICE_NAME}-server"
 
 echo "Finding process for $SERVER_NAME"
 

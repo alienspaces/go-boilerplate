@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: gomo-ingress
+  name: go-boilerplate-ingress
   namespace: default
   annotations:
     kubernetes.io/ingress.class: nginx-private
@@ -12,10 +12,10 @@ spec:
       paths:
       - path: /api/templates
         backend:
-          serviceName: gomo-template-service
+          serviceName: go-boilerplate-template-service
           servicePort: 8080
   tls:
   - hosts:
       - holymagingmages.com
-    secretName: gomo-cert
+    secretName: go-boilerplate-cert
 

@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"os"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/cli"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/config"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/log"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/store"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/cli"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/config"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/log"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/store"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/template/internal/cli/runner"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/template/internal/cli/runner"
 )
 
 func main() {

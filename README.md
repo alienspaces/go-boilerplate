@@ -1,4 +1,4 @@
-# Go Monorepo API Boilerplate
+# Go Boilerplate
 
 Contains *mostly* everything you need to get started building a set of independent fully functional Go REST API's.
 
@@ -6,17 +6,19 @@ Contains *mostly* everything you need to get started building a set of independe
   - Application
   - Model
   - Data
+- Multiple independent services
 - Configuration driven API handlers
   - JSON schema API validation
   - Auto generated API documentation
 - Middleware
   - Authentication
   - Authorization
+  - Validation
   - Database
 - Database
   - Migrations
   - Data management tools
-- Example service
+- Example services
   - Complete CRUD handlers
   - Complete unit tests
 - Developer `./scripts` for the *most common* development tasks

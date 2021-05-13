@@ -3,15 +3,15 @@ package model
 import (
 	"github.com/jmoiron/sqlx"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/model"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/configurer"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/preparer"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/repositor"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/storer"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/configurer"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/preparer"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/repositor"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/storer"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/repository/player"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/repository/playerrole"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/repository/player"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/repository/playerrole"
 )
 
 // Model -
@@ -44,45 +44,45 @@ func (m *Model) NewRepositories(p preparer.Preparer, tx *sqlx.Tx) ([]repositor.R
 
 	repositoryList := []repositor.Repositor{}
 
-	accountRepo, err := account.NewRepository(m.Log, p, tx)
+	playerRepo, err := player.NewRepository(m.Log, p, tx)
 	if err != nil {
-		m.Log.Warn("Failed new account repository >%v<", err)
+		m.Log.Warn("Failed new player repository >%v<", err)
 		return nil, err
 	}
 
-	repositoryList = append(repositoryList, accountRepo)
+	repositoryList = append(repositoryList, playerRepo)
 
-	accountRoleRepo, err := accountrole.NewRepository(m.Log, p, tx)
+	playerRoleRepo, err := playerrole.NewRepository(m.Log, p, tx)
 	if err != nil {
-		m.Log.Warn("Failed new account role repository >%v<", err)
+		m.Log.Warn("Failed new player role repository >%v<", err)
 		return nil, err
 	}
 
-	repositoryList = append(repositoryList, accountRoleRepo)
+	repositoryList = append(repositoryList, playerRoleRepo)
 
 	return repositoryList, nil
 }
 
 // PlayerRepository -
-func (m *Model) PlayerRepository() *account.Repository {
+func (m *Model) PlayerRepository() *player.Repository {
 
-	r := m.Repositories[account.TableName]
+	r := m.Repositories[player.TableName]
 	if r == nil {
-		m.Log.Warn("Repository >%s< is nil", account.TableName)
+		m.Log.Warn("Repository >%s< is nil", player.TableName)
 		return nil
 	}
 
-	return r.(*account.Repository)
+	return r.(*player.Repository)
 }
 
 // PlayerRoleRepository -
-func (m *Model) PlayerRoleRepository() *accountrole.Repository {
+func (m *Model) PlayerRoleRepository() *playerrole.Repository {
 
-	r := m.Repositories[accountrole.TableName]
+	r := m.Repositories[playerrole.TableName]
 	if r == nil {
-		m.Log.Warn("Repository >%s< is nil", accountrole.TableName)
+		m.Log.Warn("Repository >%s< is nil", playerrole.TableName)
 		return nil
 	}
 
-	return r.(*accountrole.Repository)
+	return r.(*playerrole.Repository)
 }

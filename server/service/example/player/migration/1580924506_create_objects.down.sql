@@ -1,6 +1,5 @@
 -- drop table
-DROP TABLE "account_entity";
-DROP TABLE "account_role";
-DROP TABLE "account";
+DROP TABLE "player_role";
+DROP TABLE "player";
 DROP TYPE "provider";
 DROP TYPE "role";

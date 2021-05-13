@@ -8,10 +8,10 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/config"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/log"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/configurer"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/config"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/log"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/configurer"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
 )
 
 // NewDefaultDependencies -

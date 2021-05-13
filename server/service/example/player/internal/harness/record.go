@@ -3,8 +3,8 @@ package harness
 import (
 	"github.com/brianvoe/gofakeit"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/model"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/record"
 )
 
 func (t *Testing) createPlayerRec(accountConfig PlayerConfig) (record.Player, error) {

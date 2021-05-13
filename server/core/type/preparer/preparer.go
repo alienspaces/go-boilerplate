@@ -3,7 +3,7 @@ package preparer
 import (
 	"github.com/jmoiron/sqlx"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/preparable"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/preparable"
 )
 
 // Preparer -

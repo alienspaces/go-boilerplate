@@ -7,8 +7,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/xeipuuv/gojsonschema"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/modeller"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/modeller"
 )
 
 // schemaCache - path, method, schema

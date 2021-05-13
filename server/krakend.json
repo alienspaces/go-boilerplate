@@ -38,7 +38,7 @@
     "timeout": "3000ms",
     "cache_ttl": "300s",
     "output_encoding": "json",
-    "name": "go-mono-api-boilerplate",
+    "name": "go-boilerplate",
     "endpoints": [
         {
             "endpoint": "/characters/documentation",

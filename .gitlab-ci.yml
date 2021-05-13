@@ -7,9 +7,9 @@ test-server:
   stage: test
   image: golang:1.16.4-alpine3.13
   variables:
-    POSTGRES_DB: gomo
-    POSTGRES_USER: gomo-user
-    POSTGRES_PASSWORD: gomo-pass
+    POSTGRES_DB: go-boilerplate
+    POSTGRES_USER: go-boilerplate-user
+    POSTGRES_PASSWORD: go-boilerplate-pass
   services:
     - postgres:10.4-alpine
   before_script:

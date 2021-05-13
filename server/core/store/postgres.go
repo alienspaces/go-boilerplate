@@ -6,8 +6,8 @@ import (
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq" // blank import intended
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/configurer"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/core/type/logger"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/configurer"
+	"gitlab.com/alienspaces/go-boilerplate/server/core/type/logger"
 )
 
 // getPostgresDB -

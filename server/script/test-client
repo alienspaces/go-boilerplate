@@ -16,7 +16,7 @@ source ${BASH_SOURCE%/*}/environment || exit $?
 
 dir="client"
 for f in "$dir"/*; do
-    echo "=> Test client - $f"
+    echo "=> Test client directory - $f"
     cd $f
     if [ -f "go.mod" ]; then
         go test -cover -count 1 ./... || exit $?

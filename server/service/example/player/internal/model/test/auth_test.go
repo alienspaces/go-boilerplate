@@ -7,12 +7,12 @@ import (
 	"testing"
 
 	"github.com/brianvoe/gofakeit"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/record"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/record"
 
 	"github.com/stretchr/testify/require"
 
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/harness"
-	"gitlab.com/alienspaces/go-mono-api-boilerplate/server/service/player/internal/model"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/harness"
+	"gitlab.com/alienspaces/go-boilerplate/server/service/player/internal/model"
 )
 
 func TestVerifyAuth(t *testing.T) {
