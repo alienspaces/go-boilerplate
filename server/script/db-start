@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# Local development run script
-
-# copy development env
-cp .env.development .env
-
 # environment
 source ${BASH_SOURCE%/*}/environment || exit $?
 
