@@ -16,6 +16,7 @@ function verify_env {
         # Examples
         "APP_SERVER_ENABLE_EXAMPLES" \
         # Database
+        'APP_SERVER_DB_SERVICE' \
 		'APP_SERVER_DB_HOST' \
 		'APP_SERVER_DB_NAME' \
 		'APP_SERVER_DB_PORT' \

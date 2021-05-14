@@ -12,7 +12,7 @@ source ${BASH_SOURCE%/*}/environment || exit $?
 source ${BASH_SOURCE%/*}/retry || exit $?
 
 # stop database
-source ${BASH_SOURCE%/*}/db-stop $APP_SERVER_DB_SERVICE || exit $?
+source ${BASH_SOURCE%/*}/db-stop || exit $?
 
 # start database
 echo "=> Start database"
@@ -40,6 +40,9 @@ elif [ $APP_SERVER_DB_SERVICE = "local" ]; then
     sudo -u postgres \
         psql -c "alter user $APP_SERVER_DB_USER with password '$APP_SERVER_DB_PASSWORD';"
 
+elif [ $APP_SERVER_DB_SERVICE = "ci" ]; then
+
+    echo "=> Start database - ci service"
 fi
 
 # pgcrypto for uuids
