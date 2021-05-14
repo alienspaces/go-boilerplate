@@ -207,7 +207,7 @@ func (rnr *Runner) PlayerRequestDataToRecord(data schema.PlayerData, rec *record
 	rec.Name = data.Name
 	rec.Email = data.Email
 	rec.Provider = data.Provider
-	rec.ProviderPlayerID = data.ProviderPlayerID
+	rec.ProviderAccountID = data.ProviderAccountID
 
 	return nil
 }
@@ -216,13 +216,13 @@ func (rnr *Runner) PlayerRequestDataToRecord(data schema.PlayerData, rec *record
 func (rnr *Runner) RecordToPlayerResponseData(playerRec *record.Player) (schema.PlayerData, error) {
 
 	data := schema.PlayerData{
-		ID:               playerRec.ID,
-		Name:             playerRec.Name,
-		Email:            playerRec.Email,
-		Provider:         playerRec.Provider,
-		ProviderPlayerID: playerRec.ProviderPlayerID,
-		CreatedAt:        playerRec.CreatedAt,
-		UpdatedAt:        playerRec.UpdatedAt.Time,
+		ID:                playerRec.ID,
+		Name:              playerRec.Name,
+		Email:             playerRec.Email,
+		Provider:          playerRec.Provider,
+		ProviderAccountID: playerRec.ProviderAccountID,
+		CreatedAt:         playerRec.CreatedAt,
+		UpdatedAt:         playerRec.UpdatedAt.Time,
 	}
 
 	return data, nil

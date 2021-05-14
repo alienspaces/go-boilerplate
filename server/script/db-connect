@@ -4,7 +4,7 @@
 # \l              - list schemas
 # \c go-boilerplate-template - connect to schema
 
-# environment
+# Environment
 source ${BASH_SOURCE%/*}/environment || exit $?
 
 if [ $status -ne 0 ]; then

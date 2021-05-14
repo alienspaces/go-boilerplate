@@ -45,9 +45,7 @@ func NewRunner() *Runner {
 					constant.AuthRoleAdministrator,
 					constant.AuthRoleDefault,
 				},
-				ValidateQueryParams: []string{
-					"character_type",
-				},
+				ValidateQueryParams: []string{},
 			},
 			DocumentationConfig: server.DocumentationConfig{
 				Document:    true,
@@ -94,9 +92,7 @@ func NewRunner() *Runner {
 						MatchIdentity: true,
 					},
 				},
-				ValidateQueryParams: []string{
-					"character_type",
-				},
+				ValidateQueryParams: []string{},
 			},
 			DocumentationConfig: server.DocumentationConfig{
 				Document:    true,

@@ -16,21 +16,21 @@ CREATE TYPE "role" AS ENUM (
 
 -- table player
 CREATE TABLE "player" (
-  "id" uuid CONSTRAINT player_pk PRIMARY KEY DEFAULT gen_random_uuid(),
-  "name" text NOT NULL,
-  "email" text NOT NULL,
-  "provider" provider NOT NULL,
-  "provider_player_id" text NOT NULL,
-  "created_at" timestamp NOT NULL DEFAULT (current_timestamp),
-  "updated_at" timestamp DEFAULT null,
-  "deleted_at" timestamp DEFAULT null
+  "id"                  uuid CONSTRAINT player_pk PRIMARY KEY DEFAULT gen_random_uuid(),
+  "name"                text NOT NULL,
+  "email"               text NOT NULL,
+  "provider"            provider NOT NULL,
+  "provider_account_id" text NOT NULL,
+  "created_at"          timestamp NOT NULL DEFAULT (current_timestamp),
+  "updated_at"          timestamp DEFAULT null,
+  "deleted_at"          timestamp DEFAULT null
 );
 
 -- table player role
 CREATE TABLE "player_role" (
-  "id" uuid CONSTRAINT player_role_pk PRIMARY KEY DEFAULT gen_random_uuid(),
-  "player_id" uuid NOT NULL,
-  "role" role NOT NULL,
+  "id"         uuid CONSTRAINT player_role_pk PRIMARY KEY DEFAULT gen_random_uuid(),
+  "player_id"  uuid NOT NULL,
+  "role"       role NOT NULL,
   "created_at" timestamp NOT NULL DEFAULT (current_timestamp),
   "updated_at" timestamp DEFAULT null,
   "deleted_at" timestamp DEFAULT null

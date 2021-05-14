@@ -18,7 +18,6 @@ import (
 	"gitlab.com/alienspaces/go-boilerplate/server/core/server"
 	"gitlab.com/alienspaces/go-boilerplate/server/schema"
 	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/harness"
-	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/record"
 )
 
 func TestCharacterHandler(t *testing.T) {
@@ -70,7 +69,7 @@ func TestCharacterHandler(t *testing.T) {
 			},
 			requestParams: func(data *harness.Data) map[string]string {
 				params := map[string]string{
-					":entity_id": data.CharacterRecs[0].ID,
+					":character_id": data.CharacterRecs[0].ID,
 				}
 				return params
 			},
@@ -83,8 +82,7 @@ func TestCharacterHandler(t *testing.T) {
 					Data: []schema.CharacterData{
 						{
 							ID:               data.CharacterRecs[0].ID,
-							CharacterType:    data.CharacterRecs[0].CharacterType,
-							PlayerID:         data.PlayerCharacterRecs[0].PlayerID,
+							PlayerID:         data.CharacterRecs[0].PlayerID,
 							Name:             data.CharacterRecs[0].Name,
 							Avatar:           data.CharacterRecs[0].Avatar,
 							Strength:         data.CharacterRecs[0].Strength,
@@ -93,51 +91,6 @@ func TestCharacterHandler(t *testing.T) {
 							AttributePoints:  data.CharacterRecs[0].AttributePoints,
 							ExperiencePoints: data.CharacterRecs[0].ExperiencePoints,
 							Coins:            data.CharacterRecs[0].Coins,
-						},
-					},
-				}
-				return &res
-			},
-		},
-		{
-			name: "GET - Get entity type 'starter', default role, account identity",
-			config: func(rnr *Runner) server.HandlerConfig {
-				return rnr.HandlerConfig[0]
-			},
-			requestHeaders: func(data *harness.Data) map[string]string {
-				roles := []string{
-					constant.AuthRoleDefault,
-				}
-				identity := map[string]interface{}{}
-				headers := map[string]string{
-					"Authorization": "Bearer " + validAuthToken(roles, identity),
-				}
-				return headers
-			},
-			queryParams: func(data *harness.Data) map[string]string {
-				params := map[string]string{
-					"entity_type": record.CharacterTypeStarterMage,
-				}
-				return params
-			},
-			requestData: func(data *harness.Data) *schema.CharacterRequest {
-				return nil
-			},
-			responseCode: http.StatusOK,
-			responseData: func(data *harness.Data) *schema.CharacterResponse {
-				res := schema.CharacterResponse{
-					Data: []schema.CharacterData{
-						{
-							ID:               data.CharacterRecs[1].ID,
-							CharacterType:    data.CharacterRecs[1].CharacterType,
-							Name:             data.CharacterRecs[1].Name,
-							Avatar:           data.CharacterRecs[1].Avatar,
-							Strength:         data.CharacterRecs[1].Strength,
-							Dexterity:        data.CharacterRecs[1].Dexterity,
-							Intelligence:     data.CharacterRecs[1].Intelligence,
-							AttributePoints:  data.CharacterRecs[1].AttributePoints,
-							ExperiencePoints: data.CharacterRecs[1].ExperiencePoints,
-							Coins:            data.CharacterRecs[1].Coins,
 						},
 					},
 				}
@@ -161,7 +114,7 @@ func TestCharacterHandler(t *testing.T) {
 			},
 			requestParams: func(data *harness.Data) map[string]string {
 				params := map[string]string{
-					":entity_id": "17c19414-2d15-4d20-8fc3-36fc10341dc8",
+					":character_id": "17c19414-2d15-4d20-8fc3-36fc10341dc8",
 				}
 				return params
 			},
@@ -176,14 +129,14 @@ func TestCharacterHandler(t *testing.T) {
 		{
 			name: "GET - Get existing resource, default role, account identity matches",
 			config: func(rnr *Runner) server.HandlerConfig {
-				return rnr.HandlerConfig[2]
+				return rnr.HandlerConfig[3]
 			},
 			requestHeaders: func(data *harness.Data) map[string]string {
 				roles := []string{
 					constant.AuthRoleDefault,
 				}
 				identity := map[string]interface{}{
-					"account_id": data.PlayerCharacterRecs[0].PlayerID,
+					"player_id": data.CharacterRecs[0].PlayerID,
 				}
 				headers := map[string]string{
 					"Authorization": "Bearer " + validAuthToken(roles, identity),
@@ -192,8 +145,8 @@ func TestCharacterHandler(t *testing.T) {
 			},
 			requestParams: func(data *harness.Data) map[string]string {
 				params := map[string]string{
-					":account_id": data.PlayerCharacterRecs[0].PlayerID,
-					":entity_id":  data.PlayerCharacterRecs[0].CharacterID,
+					":player_id":    data.CharacterRecs[0].PlayerID,
+					":character_id": data.CharacterRecs[0].ID,
 				}
 				return params
 			},
@@ -205,9 +158,8 @@ func TestCharacterHandler(t *testing.T) {
 				res := schema.CharacterResponse{
 					Data: []schema.CharacterData{
 						{
-							ID:               data.PlayerCharacterRecs[0].CharacterID,
-							CharacterType:    data.CharacterRecs[0].CharacterType,
-							PlayerID:         data.PlayerCharacterRecs[0].PlayerID,
+							ID:               data.CharacterRecs[0].ID,
+							PlayerID:         data.CharacterRecs[0].PlayerID,
 							Name:             data.CharacterRecs[0].Name,
 							Avatar:           data.CharacterRecs[0].Avatar,
 							Strength:         data.CharacterRecs[0].Strength,
@@ -223,7 +175,7 @@ func TestCharacterHandler(t *testing.T) {
 			},
 		},
 		{
-			name: "POST - Create without entity ID, default role, account identity matches",
+			name: "POST - Create without character ID, default role, account identity matches",
 			config: func(rnr *Runner) server.HandlerConfig {
 				return rnr.HandlerConfig[4]
 			},
@@ -232,7 +184,7 @@ func TestCharacterHandler(t *testing.T) {
 					constant.AuthRoleDefault,
 				}
 				identity := map[string]interface{}{
-					"account_id": data.PlayerCharacterRecs[0].ID,
+					"player_id": data.CharacterRecs[0].ID,
 				}
 				headers := map[string]string{
 					"Authorization": "Bearer " + validAuthToken(roles, identity),
@@ -241,15 +193,14 @@ func TestCharacterHandler(t *testing.T) {
 			},
 			requestParams: func(data *harness.Data) map[string]string {
 				params := map[string]string{
-					":account_id": data.PlayerCharacterRecs[0].ID,
+					":player_id": data.CharacterRecs[0].ID,
 				}
 				return params
 			},
 			requestData: func(data *harness.Data) *schema.CharacterRequest {
 				req := schema.CharacterRequest{
 					Data: schema.CharacterData{
-						Name:   "Veronica The Incredible",
-						Avatar: record.MageAvatarRedFairy,
+						Name: "Veronica The Incredible",
 					},
 				}
 				return &req
@@ -266,7 +217,7 @@ func TestCharacterHandler(t *testing.T) {
 					constant.AuthRoleDefault,
 				}
 				identity := map[string]interface{}{
-					"account_id": data.PlayerCharacterRecs[0].PlayerID,
+					"player_id": data.CharacterRecs[0].PlayerID,
 				}
 				headers := map[string]string{
 					"Authorization": "Bearer " + validAuthToken(roles, identity),
@@ -275,16 +226,15 @@ func TestCharacterHandler(t *testing.T) {
 			},
 			requestParams: func(data *harness.Data) map[string]string {
 				params := map[string]string{
-					":account_id": data.PlayerCharacterRecs[0].PlayerID,
-					":entity_id":  "e3a9e0f8-ce9c-477b-8b93-cf4da03af4c9",
+					":player_id":    data.CharacterRecs[0].PlayerID,
+					":character_id": "e3a9e0f8-ce9c-477b-8b93-cf4da03af4c9",
 				}
 				return params
 			},
 			requestData: func(data *harness.Data) *schema.CharacterRequest {
 				req := schema.CharacterRequest{
 					Data: schema.CharacterData{
-						Name:   "Audrey The Amazing",
-						Avatar: record.MageAvatarDarkArmoured,
+						Name: "Audrey The Amazing",
 					},
 				}
 				return &req
@@ -295,10 +245,8 @@ func TestCharacterHandler(t *testing.T) {
 					Data: []schema.CharacterData{
 						{
 							ID:              "e3a9e0f8-ce9c-477b-8b93-cf4da03af4c9",
-							CharacterType:   record.CharacterTypePlayerMage,
-							PlayerID:        data.PlayerCharacterRecs[0].PlayerID,
+							PlayerID:        data.CharacterRecs[0].PlayerID,
 							Name:            "Audrey The Amazing",
-							Avatar:          record.MageAvatarDarkArmoured,
 							AttributePoints: 32,
 						},
 					},
@@ -316,7 +264,7 @@ func TestCharacterHandler(t *testing.T) {
 					constant.AuthRoleDefault,
 				}
 				identity := map[string]interface{}{
-					"account_id": data.PlayerCharacterRecs[0].PlayerID,
+					"player_id": data.CharacterRecs[0].PlayerID,
 				}
 				headers := map[string]string{
 					"Authorization": "Bearer " + validAuthToken(roles, identity),
@@ -325,17 +273,16 @@ func TestCharacterHandler(t *testing.T) {
 			},
 			requestParams: func(data *harness.Data) map[string]string {
 				params := map[string]string{
-					":account_id": data.PlayerCharacterRecs[0].PlayerID,
-					":entity_id":  data.PlayerCharacterRecs[0].CharacterID,
+					":player_id":    data.CharacterRecs[0].PlayerID,
+					":character_id": data.CharacterRecs[0].ID,
 				}
 				return params
 			},
 			requestData: func(data *harness.Data) *schema.CharacterRequest {
 				req := schema.CharacterRequest{
 					Data: schema.CharacterData{
-						ID:               data.PlayerCharacterRecs[0].CharacterID,
-						CharacterType:    data.CharacterRecs[0].CharacterType,
-						PlayerID:         data.PlayerCharacterRecs[0].PlayerID,
+						ID:               data.CharacterRecs[0].ID,
+						PlayerID:         data.CharacterRecs[0].PlayerID,
 						Name:             "Barricade Block",
 						Avatar:           data.CharacterRecs[0].Avatar,
 						Strength:         data.CharacterRecs[0].Strength,
@@ -353,9 +300,8 @@ func TestCharacterHandler(t *testing.T) {
 				res := schema.CharacterResponse{
 					Data: []schema.CharacterData{
 						{
-							ID:               data.PlayerCharacterRecs[0].CharacterID,
-							CharacterType:    data.CharacterRecs[0].CharacterType,
-							PlayerID:         data.PlayerCharacterRecs[0].PlayerID,
+							ID:               data.CharacterRecs[0].ID,
+							PlayerID:         data.CharacterRecs[0].PlayerID,
 							Name:             "Barricade Block",
 							Avatar:           data.CharacterRecs[0].Avatar,
 							Strength:         data.CharacterRecs[0].Strength,
@@ -380,7 +326,7 @@ func TestCharacterHandler(t *testing.T) {
 					constant.AuthRoleDefault,
 				}
 				identity := map[string]interface{}{
-					"account_id": data.PlayerCharacterRecs[0].ID,
+					"player_id": data.CharacterRecs[0].ID,
 				}
 				headers := map[string]string{
 					"Authorization": "Bearer " + validAuthToken(roles, identity),
@@ -389,8 +335,8 @@ func TestCharacterHandler(t *testing.T) {
 			},
 			requestParams: func(data *harness.Data) map[string]string {
 				params := map[string]string{
-					":account_id": data.PlayerCharacterRecs[0].ID,
-					":entity_id":  data.CharacterRecs[0].ID,
+					":player_id":    data.CharacterRecs[0].ID,
+					":character_id": data.CharacterRecs[0].ID,
 				}
 				return params
 			},
@@ -527,10 +473,7 @@ func TestCharacterHandler(t *testing.T) {
 				// response data
 				if resData != nil {
 					require.Equal(t, resData.Data[0].ID, res.Data[0].ID, "ID equals expected")
-					require.Equal(t, resData.Data[0].CharacterType, res.Data[0].CharacterType, "CharacterType equals expected")
-					if resData.Data[0].CharacterType == record.CharacterTypePlayerMage {
-						require.Equal(t, resData.Data[0].PlayerID, res.Data[0].PlayerID, "PlayerID equals expected")
-					}
+					require.Equal(t, resData.Data[0].PlayerID, res.Data[0].PlayerID, "PlayerID equals expected")
 					require.Equal(t, resData.Data[0].Name, res.Data[0].Name, "Name equals expected")
 					require.Equal(t, resData.Data[0].Strength, res.Data[0].Strength, "Strength equals expected")
 					require.Equal(t, resData.Data[0].Dexterity, res.Data[0].Dexterity, "Dexterity equals expected")

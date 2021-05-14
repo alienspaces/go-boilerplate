@@ -3,7 +3,7 @@
 # copy ci env
 cp .env.ci .env
 
-# environment
+# Environment
 source ${BASH_SOURCE%/*}/environment || exit $?
 
 if ! [[ -n ${APP_SERVER_DB_SERVICE} ]]; then

@@ -27,11 +27,11 @@ func (rnr *Runner) PostAuthHandler(w http.ResponseWriter, r *http.Request, pp ht
 	}
 
 	accountRec, err := m.(*model.Model).AuthVerify(model.AuthData{
-		Provider:         req.Data.Provider,
-		ProviderPlayerID: req.Data.ProviderPlayerID,
-		ProviderToken:    req.Data.ProviderToken,
-		PlayerEmail:      req.Data.PlayerEmail,
-		PlayerName:       req.Data.PlayerName,
+		Provider:          req.Data.Provider,
+		ProviderAccountID: req.Data.ProviderAccountID,
+		ProviderToken:     req.Data.ProviderToken,
+		PlayerEmail:       req.Data.PlayerEmail,
+		PlayerName:        req.Data.PlayerName,
 	})
 	if err != nil {
 		rnr.WriteUnauthorizedError(l, w, err)
@@ -68,15 +68,15 @@ func (rnr *Runner) PostAuthHandler(w http.ResponseWriter, r *http.Request, pp ht
 	res := schema.AuthResponse{
 		Data: []schema.AuthData{
 			{
-				Provider:         req.Data.Provider,
-				ProviderPlayerID: req.Data.ProviderPlayerID,
-				ProviderToken:    req.Data.ProviderToken,
-				PlayerID:         accountRec.ID,
-				PlayerName:       accountRec.Name,
-				PlayerEmail:      accountRec.Email,
-				Token:            tokenString,
-				CreatedAt:        accountRec.CreatedAt,
-				UpdatedAt:        accountRec.UpdatedAt.Time,
+				Provider:          req.Data.Provider,
+				ProviderAccountID: req.Data.ProviderAccountID,
+				ProviderToken:     req.Data.ProviderToken,
+				PlayerID:          accountRec.ID,
+				PlayerName:        accountRec.Name,
+				PlayerEmail:       accountRec.Email,
+				Token:             tokenString,
+				CreatedAt:         accountRec.CreatedAt,
+				UpdatedAt:         accountRec.UpdatedAt.Time,
 			},
 		},
 	}

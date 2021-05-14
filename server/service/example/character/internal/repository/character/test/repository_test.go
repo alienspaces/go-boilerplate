@@ -33,8 +33,9 @@ func TestCreateOne(t *testing.T) {
 		{
 			name: "Without ID",
 			rec: func(data *harness.Data) *record.Character {
+				playerID, _ := uuid.NewRandom()
 				return &record.Character{
-					CharacterType: record.CharacterTypeMage,
+					PlayerID: playerID.String(),
 				}
 			},
 			err: false,
@@ -42,10 +43,11 @@ func TestCreateOne(t *testing.T) {
 		{
 			name: "With ID",
 			rec: func(data *harness.Data) *record.Character {
-				rec := &record.Character{
-					CharacterType: record.CharacterTypeMage,
-				}
 				id, _ := uuid.NewRandom()
+				playerID, _ := uuid.NewRandom()
+				rec := &record.Character{
+					PlayerID: playerID.String(),
+				}
 				rec.ID = id.String()
 
 				return rec

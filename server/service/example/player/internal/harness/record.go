@@ -23,11 +23,11 @@ func (t *Testing) createPlayerRec(accountConfig PlayerConfig) (record.Player, er
 	}
 
 	if rec.Provider == "" {
-		rec.Provider = record.PlayerProviderGoogle
+		rec.Provider = record.AccountProviderGoogle
 	}
 
-	if rec.ProviderPlayerID == "" {
-		rec.ProviderPlayerID = gofakeit.UUID()
+	if rec.ProviderAccountID == "" {
+		rec.ProviderAccountID = gofakeit.UUID()
 	}
 
 	err := t.Model.(*model.Model).CreatePlayerRec(&rec)

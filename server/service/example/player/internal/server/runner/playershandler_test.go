@@ -72,7 +72,7 @@ func TestPlayerHandler(t *testing.T) {
 			},
 			requestParams: func(data *harness.Data) map[string]string {
 				params := map[string]string{
-					":account_id": data.PlayerRecs[0].ID,
+					":player_id": data.PlayerRecs[0].ID,
 				}
 				return params
 			},
@@ -88,7 +88,7 @@ func TestPlayerHandler(t *testing.T) {
 							Name:              data.PlayerRecs[0].Name,
 							Email:             data.PlayerRecs[0].Email,
 							Provider:          data.PlayerRecs[0].Provider,
-							ProviderPlayerID: data.PlayerRecs[0].ProviderPlayerID,
+							ProviderAccountID: data.PlayerRecs[0].ProviderAccountID,
 						},
 					},
 				}
@@ -108,7 +108,7 @@ func TestPlayerHandler(t *testing.T) {
 			},
 			requestParams: func(data *harness.Data) map[string]string {
 				params := map[string]string{
-					":account_id": "17c19414-2d15-4d20-8fc3-36fc10341dc8",
+					":player_id": "17c19414-2d15-4d20-8fc3-36fc10341dc8",
 				}
 				return params
 			},
@@ -133,8 +133,8 @@ func TestPlayerHandler(t *testing.T) {
 					Data: schema.PlayerData{
 						Name:              "Horrific Harry",
 						Email:             "horrificharry@example.com",
-						Provider:          record.PlayerProviderGoogle,
-						ProviderPlayerID: "abcdefg",
+						Provider:          record.AccountProviderGoogle,
+						ProviderAccountID: "abcdefg",
 					},
 				}
 				return &req
@@ -154,7 +154,7 @@ func TestPlayerHandler(t *testing.T) {
 			},
 			requestParams: func(data *harness.Data) map[string]string {
 				params := map[string]string{
-					":account_id": "e3a9e0f8-ce9c-477b-8b93-cf4da03af4c9",
+					":player_id": "e3a9e0f8-ce9c-477b-8b93-cf4da03af4c9",
 				}
 				return params
 			},
@@ -163,8 +163,8 @@ func TestPlayerHandler(t *testing.T) {
 					Data: schema.PlayerData{
 						Name:              "Scary Susan",
 						Email:             "scarysusan@example.com",
-						Provider:          record.PlayerProviderGoogle,
-						ProviderPlayerID: "abcdefg",
+						Provider:          record.AccountProviderGoogle,
+						ProviderAccountID: "abcdefg",
 					},
 				}
 				return &req
@@ -177,8 +177,8 @@ func TestPlayerHandler(t *testing.T) {
 							ID:                "e3a9e0f8-ce9c-477b-8b93-cf4da03af4c9",
 							Name:              "Scary Susan",
 							Email:             "scarysusan@example.com",
-							Provider:          record.PlayerProviderGoogle,
-							ProviderPlayerID: "abcdefg",
+							Provider:          record.AccountProviderGoogle,
+							ProviderAccountID: "abcdefg",
 						},
 					},
 				}
@@ -198,7 +198,7 @@ func TestPlayerHandler(t *testing.T) {
 			},
 			requestParams: func(data *harness.Data) map[string]string {
 				params := map[string]string{
-					":account_id": data.PlayerRecs[0].ID,
+					":player_id": data.PlayerRecs[0].ID,
 				}
 				return params
 			},
@@ -208,8 +208,8 @@ func TestPlayerHandler(t *testing.T) {
 						ID:                data.PlayerRecs[0].ID,
 						Name:              "Scary Susan",
 						Email:             "scarysusan@example.com",
-						Provider:          record.PlayerProviderGoogle,
-						ProviderPlayerID: "abcdefg",
+						Provider:          record.AccountProviderGoogle,
+						ProviderAccountID: "abcdefg",
 					},
 				}
 				return &req
@@ -222,8 +222,8 @@ func TestPlayerHandler(t *testing.T) {
 							ID:                data.PlayerRecs[0].ID,
 							Name:              "Scary Susan",
 							Email:             "scarysusan@example.com",
-							Provider:          record.PlayerProviderGoogle,
-							ProviderPlayerID: "abcdefg",
+							Provider:          record.AccountProviderGoogle,
+							ProviderAccountID: "abcdefg",
 						},
 					},
 				}
@@ -243,7 +243,7 @@ func TestPlayerHandler(t *testing.T) {
 			},
 			requestParams: func(data *harness.Data) map[string]string {
 				params := map[string]string{
-					":account_id": "17c19414-2d15-4d20-8fc3-36fc10341dc8",
+					":player_id": "17c19414-2d15-4d20-8fc3-36fc10341dc8",
 				}
 				return params
 			},
@@ -399,7 +399,7 @@ func TestPlayerHandler(t *testing.T) {
 					require.Equal(t, resData.Data[0].Name, res.Data[0].Name, "Name equals expected")
 					require.Equal(t, resData.Data[0].Email, res.Data[0].Email, "Email equals expected")
 					require.Equal(t, resData.Data[0].Provider, res.Data[0].Provider, "Provider equals expected")
-					require.Equal(t, resData.Data[0].ProviderPlayerID, res.Data[0].ProviderPlayerID, "ProviderPlayerID equals expected")
+					require.Equal(t, resData.Data[0].ProviderAccountID, res.Data[0].ProviderAccountID, "ProviderAccountID equals expected")
 				}
 
 				// record timestamps

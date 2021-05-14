@@ -36,8 +36,8 @@ func TestCreatePlayerRec(t *testing.T) {
 				return &record.Player{
 					Name:              "Scary Susan",
 					Email:             "scarysusan@example.com",
-					Provider:          record.PlayerProviderGoogle,
-					ProviderPlayerID: "abcdefg",
+					Provider:          record.AccountProviderGoogle,
+					ProviderAccountID: "abcdefg",
 				}
 			},
 			err: false,
@@ -48,8 +48,8 @@ func TestCreatePlayerRec(t *testing.T) {
 				rec := &record.Player{
 					Name:              "Horrific Harry",
 					Email:             "horrificharry@example.com",
-					Provider:          record.PlayerProviderGoogle,
-					ProviderPlayerID: "abcdefg",
+					Provider:          record.AccountProviderGoogle,
+					ProviderAccountID: "abcdefg",
 				}
 				id, _ := uuid.NewRandom()
 				rec.ID = id.String()

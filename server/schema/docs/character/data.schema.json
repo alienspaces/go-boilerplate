@@ -13,11 +13,7 @@
             "format": "uuid",
             "example": "a87feca8-d6f0-4794-98c7-037b30219520"
         },
-        "character_type": {
-            "description": "Type of character, starter, familliar, non-player, player",
-            "type": "string"
-        },
-        "account_id": {
+        "player_id": {
             "description": "Player resource ID",
             "type": "string",
             "format": "uuid",

@@ -13,21 +13,9 @@ func NewTestHarness() (*harness.Testing, error) {
 
 	// harness
 	config := harness.DataConfig{
-		PlayerCharacterConfig: []harness.PlayerCharacterConfig{
-			{
-				Record: record.PlayerCharacter{},
-				CharacterConfig: []harness.CharacterConfig{
-					{
-						Record: record.Character{},
-					},
-				},
-			},
-		},
 		CharacterConfig: []harness.CharacterConfig{
 			{
-				Record: record.Character{
-					CharacterType: record.CharacterTypeStarterMage,
-				},
+				Record: record.Character{},
 			},
 		},
 	}

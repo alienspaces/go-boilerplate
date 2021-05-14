@@ -16,13 +16,6 @@ type Testing struct {
 
 // DataConfig -
 type DataConfig struct {
-	CharacterConfig        []CharacterConfig
-	PlayerCharacterConfig []PlayerCharacterConfig
-}
-
-// PlayerCharacterConfig -
-type PlayerCharacterConfig struct {
-	Record       record.PlayerCharacter
 	CharacterConfig []CharacterConfig
 }
 
@@ -33,8 +26,7 @@ type CharacterConfig struct {
 
 // Data -
 type Data struct {
-	CharacterRecs        []record.Character
-	PlayerCharacterRecs []record.PlayerCharacter
+	CharacterRecs []record.Character
 }
 
 // NewTesting -
@@ -76,46 +68,15 @@ func (t *Testing) Modeller() (modeller.Modeller, error) {
 // CreateData - Custom data
 func (t *Testing) CreateData() error {
 
-	// Player entity with entity records
-	for _, accountCharacterConfig := range t.DataConfig.PlayerCharacterConfig {
+	// Stand alone character records
+	for _, characterConfig := range t.DataConfig.CharacterConfig {
 
-		// NOTE: For an account entity record to be created there must
-		// be at least one entity record created.
-		if len(accountCharacterConfig.CharacterConfig) == 0 {
-			accountCharacterConfig.CharacterConfig = []CharacterConfig{
-				{
-					Record: record.Character{},
-				},
-			}
-		}
-
-		for _, entityConfig := range accountCharacterConfig.CharacterConfig {
-
-			entityRec, err := t.createCharacterRec(entityConfig)
-			if err != nil {
-				t.Log.Warn("Failed creating entity record >%v<", err)
-				return err
-			}
-			t.Data.CharacterRecs = append(t.Data.CharacterRecs, entityRec)
-
-			accountCharacterRec, err := t.createPlayerCharacterRec(entityRec, accountCharacterConfig)
-			if err != nil {
-				t.Log.Warn("Failed creating account entity record >%v<", err)
-				return err
-			}
-			t.Data.PlayerCharacterRecs = append(t.Data.PlayerCharacterRecs, accountCharacterRec)
-		}
-	}
-
-	// Stand alone entity records
-	for _, entityConfig := range t.DataConfig.CharacterConfig {
-
-		entityRec, err := t.createCharacterRec(entityConfig)
+		characterRec, err := t.createCharacterRec(characterConfig)
 		if err != nil {
-			t.Log.Warn("Failed creating entity record >%v<", err)
+			t.Log.Warn("Failed creating character record >%v<", err)
 			return err
 		}
-		t.Data.CharacterRecs = append(t.Data.CharacterRecs, entityRec)
+		t.Data.CharacterRecs = append(t.Data.CharacterRecs, characterRec)
 	}
 
 	return nil
@@ -124,32 +85,17 @@ func (t *Testing) CreateData() error {
 // RemoveData -
 func (t *Testing) RemoveData() error {
 
-ACCOUNT_RECS:
-	for {
-		if len(t.Data.PlayerCharacterRecs) == 0 {
-			break ACCOUNT_RECS
-		}
-		rec := record.PlayerCharacter{}
-		rec, t.Data.PlayerCharacterRecs = t.Data.PlayerCharacterRecs[0], t.Data.PlayerCharacterRecs[1:]
-
-		err := t.Model.(*model.Model).RemovePlayerCharacterRec(rec.ID)
-		if err != nil {
-			t.Log.Warn("Failed removing account entity record >%v<", err)
-			return err
-		}
-	}
-
-ENTITY_RECS:
+CHARACTER_RECS:
 	for {
 		if len(t.Data.CharacterRecs) == 0 {
-			break ENTITY_RECS
+			break CHARACTER_RECS
 		}
 		rec := record.Character{}
 		rec, t.Data.CharacterRecs = t.Data.CharacterRecs[0], t.Data.CharacterRecs[1:]
 
 		err := t.Model.(*model.Model).RemoveCharacterRec(rec.ID)
 		if err != nil {
-			t.Log.Warn("Failed removing entity record >%v<", err)
+			t.Log.Warn("Failed removing character record >%v<", err)
 			return err
 		}
 	}

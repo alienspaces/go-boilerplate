@@ -17,11 +17,11 @@ type AuthRequest struct {
 // AuthData -
 type AuthData struct {
 	Provider          string    `json:"provider,omitempty"`
-	ProviderPlayerID string    `json:"provider_account_id,omitempty"`
+	ProviderAccountID string    `json:"provider_account_id,omitempty"`
 	ProviderToken     string    `json:"provider_token,omitempty"`
-	PlayerID         string    `json:"account_id,omitempty"`
-	PlayerName       string    `json:"account_name,omitempty"`
-	PlayerEmail      string    `json:"account_email,omitempty"`
+	PlayerID          string    `json:"player_id,omitempty"`
+	PlayerName        string    `json:"player_name,omitempty"`
+	PlayerEmail       string    `json:"player_email,omitempty"`
 	Token             string    `json:"token,omitempty"`
 	CreatedAt         time.Time `json:"created_at,omitempty"`
 	UpdatedAt         time.Time `json:"updated_at,omitempty"`

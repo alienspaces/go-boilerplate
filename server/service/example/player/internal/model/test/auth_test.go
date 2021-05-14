@@ -35,8 +35,8 @@ func TestVerifyAuth(t *testing.T) {
 			name: "Anonymous",
 			data: func() model.AuthData {
 				return model.AuthData{
-					Provider:          record.PlayerProviderAnonymous,
-					ProviderPlayerID: gofakeit.UUID(),
+					Provider:          record.AccountProviderAnonymous,
+					ProviderAccountID: gofakeit.UUID(),
 				}
 			},
 			err: false,
@@ -45,10 +45,10 @@ func TestVerifyAuth(t *testing.T) {
 			name: "Google",
 			data: func() model.AuthData {
 				return model.AuthData{
-					Provider:          record.PlayerProviderGoogle,
-					ProviderPlayerID: gofakeit.UUID(),
-					PlayerName:       gofakeit.Name(),
-					PlayerEmail:      gofakeit.Email(),
+					Provider:          record.AccountProviderGoogle,
+					ProviderAccountID: gofakeit.UUID(),
+					PlayerName:        gofakeit.Name(),
+					PlayerEmail:       gofakeit.Email(),
 				}
 			},
 			err: true,
@@ -84,7 +84,7 @@ func TestVerifyAuth(t *testing.T) {
 			}
 			require.NoError(t, err, "AuthVerify returns without error")
 			require.NotEmpty(t, rec.Provider, "AuthVerify returns record with Provider")
-			require.NotEmpty(t, rec.ProviderPlayerID, "AuthVerify returns record with ProviderPlayerID")
+			require.NotEmpty(t, rec.ProviderAccountID, "AuthVerify returns record with ProviderAccountID")
 			require.NotEmpty(t, rec.CreatedAt, "AuthVerify returns record with CreatedAt")
 		}()
 	}

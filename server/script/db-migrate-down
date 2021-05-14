@@ -2,7 +2,7 @@
 
 # Local development run script
 
-# environment
+# Environment
 source ${BASH_SOURCE%/*}/environment || exit $?
 
 # go version

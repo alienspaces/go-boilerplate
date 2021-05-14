@@ -15,37 +15,32 @@ func (rnr *Runner) LoadTestData(c *cli.Context) error {
 
 	// harness
 	config := harness.DataConfig{
-		PlayerCharacterConfig: []harness.PlayerCharacterConfig{
+		CharacterConfig: []harness.CharacterConfig{
+			// Maize
 			{
-				Record: record.PlayerCharacter{},
-				CharacterConfig: []harness.CharacterConfig{
-					// Maize
-					{
-						Record: record.Character{
-							Record: repository.Record{
-								ID: "1d3f8d0b-b7b3-4569-a099-8f1b6e2a2c71",
-							},
-							Name: "Maize",
-						},
+				Record: record.Character{
+					Record: repository.Record{
+						ID: "1d3f8d0b-b7b3-4569-a099-8f1b6e2a2c71",
 					},
-					// Veronica
-					{
-						Record: record.Character{
-							Record: repository.Record{
-								ID: "6992c452-dadf-47fd-99fa-64287b44e475",
-							},
-							Name: "Veronica",
-						},
+					Name: "Maize",
+				},
+			},
+			// Veronica
+			{
+				Record: record.Character{
+					Record: repository.Record{
+						ID: "6992c452-dadf-47fd-99fa-64287b44e475",
 					},
-					// Audrey
-					{
-						Record: record.Character{
-							Record: repository.Record{
-								ID: "cf0371e6-10e3-4594-a3fb-fd8253cccf2a",
-							},
-							Name: "Audrey",
-						},
+					Name: "Veronica",
+				},
+			},
+			// Audrey
+			{
+				Record: record.Character{
+					Record: repository.Record{
+						ID: "cf0371e6-10e3-4594-a3fb-fd8253cccf2a",
 					},
+					Name: "Audrey",
 				},
 			},
 		},

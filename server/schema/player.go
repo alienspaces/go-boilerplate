@@ -20,7 +20,7 @@ type PlayerData struct {
 	Name              string    `json:"name,omitempty"`
 	Email             string    `json:"email,omitempty"`
 	Provider          string    `json:"provider,omitempty"`
-	ProviderPlayerID string    `json:"provider_account_id,omitempty"`
+	ProviderAccountID string    `json:"provider_account_id,omitempty"`
 	CreatedAt         time.Time `json:"created_at,omitempty"`
 	UpdatedAt         time.Time `json:"updated_at,omitempty"`
 }
@@ -39,9 +39,9 @@ type PlayerCharacterResponse struct {
 
 // PlayerCharacterData -
 type PlayerCharacterData struct {
-	ID        string    `json:"id,omitempty"`
-	PlayerID string    `json:"account_id,omitempty"`
-	CharacterID  string    `json:"entity_id,omitempty"`
-	CreatedAt time.Time `json:"created_at,omitempty"`
-	UpdatedAt time.Time `json:"updated_at,omitempty"`
+	ID          string    `json:"id,omitempty"`
+	PlayerID    string    `json:"account_id,omitempty"`
+	CharacterID string    `json:"entity_id,omitempty"`
+	CreatedAt   time.Time `json:"created_at,omitempty"`
+	UpdatedAt   time.Time `json:"updated_at,omitempty"`
 }

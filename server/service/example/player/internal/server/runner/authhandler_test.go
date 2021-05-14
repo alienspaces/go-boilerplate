@@ -57,7 +57,7 @@ func TestAuthHandler(t *testing.T) {
 					Data: schema.AuthData{
 						Provider:          data.PlayerRecs[0].Provider,
 						ProviderToken:     "eafee2f1-ae38-4289-8163-63407bb9ff17",
-						ProviderPlayerID: data.PlayerRecs[0].ProviderPlayerID,
+						ProviderAccountID: data.PlayerRecs[0].ProviderAccountID,
 					},
 				}
 				return &res
@@ -68,7 +68,7 @@ func TestAuthHandler(t *testing.T) {
 					Data: []schema.AuthData{
 						{
 							Provider:          data.PlayerRecs[0].Provider,
-							ProviderPlayerID: data.PlayerRecs[0].ProviderPlayerID,
+							ProviderAccountID: data.PlayerRecs[0].ProviderAccountID,
 						},
 					},
 				}
@@ -199,7 +199,7 @@ func TestAuthHandler(t *testing.T) {
 				// response data
 				if resData != nil {
 					require.Equal(t, resData.Data[0].Provider, res.Data[0].Provider, "Provider equals expected")
-					require.Equal(t, resData.Data[0].ProviderPlayerID, res.Data[0].ProviderPlayerID, "ProviderPlayerID equals expected")
+					require.Equal(t, resData.Data[0].ProviderAccountID, res.Data[0].ProviderAccountID, "ProviderAccountID equals expected")
 				}
 
 				// record timestamps

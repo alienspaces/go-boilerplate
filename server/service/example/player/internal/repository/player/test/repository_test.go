@@ -34,10 +34,10 @@ func TestCreateOne(t *testing.T) {
 			name: "Without ID",
 			rec: func() *record.Player {
 				return &record.Player{
-					Name:             "Scary Susan",
-					Email:            "scarysusan@example.com",
-					Provider:         record.PlayerProviderGoogle,
-					ProviderPlayerID: "abcdefg",
+					Name:              "Scary Susan",
+					Email:             "scarysusan@example.com",
+					Provider:          record.AccountProviderGoogle,
+					ProviderAccountID: "abcdefg",
 				}
 			},
 			err: false,
@@ -46,10 +46,10 @@ func TestCreateOne(t *testing.T) {
 			name: "With ID",
 			rec: func() *record.Player {
 				rec := &record.Player{
-					Name:             "Horrific Harry",
-					Email:            "horrificharry@example.com",
-					Provider:         record.PlayerProviderGoogle,
-					ProviderPlayerID: "abcdefg",
+					Name:              "Horrific Harry",
+					Email:             "horrificharry@example.com",
+					Provider:          record.AccountProviderGoogle,
+					ProviderAccountID: "abcdefg",
 				}
 				id, _ := uuid.NewRandom()
 				rec.ID = id.String()

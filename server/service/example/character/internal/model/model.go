@@ -11,7 +11,6 @@ import (
 	"gitlab.com/alienspaces/go-boilerplate/server/core/type/storer"
 
 	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/repository/character"
-	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/repository/playercharacter"
 )
 
 const (
@@ -52,14 +51,6 @@ func (m *Model) NewRepositories(p preparer.Preparer, tx *sqlx.Tx) ([]repositor.R
 
 	repositoryList = append(repositoryList, characterRepo)
 
-	accountCharacterRepo, err := playercharacter.NewRepository(m.Log, p, tx)
-	if err != nil {
-		m.Log.Warn("Failed new account character repository >%v<", err)
-		return nil, err
-	}
-
-	repositoryList = append(repositoryList, accountCharacterRepo)
-
 	return repositoryList, nil
 }
 
@@ -73,16 +64,4 @@ func (m *Model) CharacterRepository() *character.Repository {
 	}
 
 	return r.(*character.Repository)
-}
-
-// PlayerCharacterRepository -
-func (m *Model) PlayerCharacterRepository() *playercharacter.Repository {
-
-	r := m.Repositories[playercharacter.TableName]
-	if r == nil {
-		m.Log.Warn("Repository >%s< is nil", character.TableName)
-		return nil
-	}
-
-	return r.(*playercharacter.Repository)
 }

@@ -10,22 +10,22 @@ import (
 func (m *Model) ValidatePlayerRec(rec *record.Player) error {
 
 	switch rec.Provider {
-	case record.PlayerProviderAnonymous:
+	case record.AccountProviderAnonymous:
 		// We only require a provider player ID to create an anonymous local player
-		if rec.ProviderPlayerID == "" {
-			msg := "missing ProviderPlayerID, cannot create an anonymous player"
+		if rec.ProviderAccountID == "" {
+			msg := "missing ProviderAccountID, cannot create an anonymous player"
 			m.Log.Warn(msg)
 			return fmt.Errorf(msg)
 		}
-	case record.PlayerProviderGoogle:
+	case record.AccountProviderGoogle:
 		// We require a provider player ID and email to create a Google local player
 		if rec.Email == "" {
 			msg := "missing Email, cannot create a Google player"
 			m.Log.Warn(msg)
 			return fmt.Errorf(msg)
 		}
-		if rec.ProviderPlayerID == "" {
-			msg := "missing ProviderPlayerID, cannot create a Google player"
+		if rec.ProviderAccountID == "" {
+			msg := "missing ProviderAccountID, cannot create a Google player"
 			m.Log.Warn(msg)
 			return fmt.Errorf(msg)
 		}

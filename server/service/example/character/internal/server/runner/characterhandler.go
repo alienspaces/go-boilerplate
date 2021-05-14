@@ -65,25 +65,8 @@ func (rnr *Runner) GetCharactersHandler(w http.ResponseWriter, r *http.Request, 
 	data := []schema.CharacterData{}
 	for _, characterRec := range characterRecs {
 
-		// Get associated player character record if it exists
-		playerCharacterRecs, err := m.(*model.Model).GetPlayerCharacterRecs(
-			map[string]interface{}{
-				"character_id": characterRec.ID,
-			},
-			nil, false,
-		)
-		if err != nil {
-			rnr.WriteSystemError(l, w, err)
-			return
-		}
-
-		var playerCharacterRec *record.PlayerCharacter
-		if len(playerCharacterRecs) == 1 {
-			playerCharacterRec = playerCharacterRecs[0]
-		}
-
 		// response data
-		responseData, err := rnr.RecordToCharacterResponseData(playerCharacterRec, characterRec)
+		responseData, err := rnr.RecordToCharacterResponseData(characterRec)
 		if err != nil {
 			rnr.WriteSystemError(l, w, err)
 			return
@@ -113,7 +96,6 @@ func (rnr *Runner) GetPlayerCharactersHandler(w http.ResponseWriter, r *http.Req
 	l.Info("** Get characters handler ** p >%#v< m >%#v<", pp, m)
 
 	var characterRecs []*record.Character
-	var playerCharacterRecs []*record.PlayerCharacter
 
 	var err error
 
@@ -125,26 +107,6 @@ func (rnr *Runner) GetPlayerCharactersHandler(w http.ResponseWriter, r *http.Req
 
 		l.Info("Getting player ID >%s< character ID >%s< record ", playerID, characterID)
 
-		playerCharacterRecs, err = m.(*model.Model).GetPlayerCharacterRecs(
-			map[string]interface{}{
-				"player_id":    playerID,
-				"character_id": characterID,
-			},
-			nil, false)
-		if err != nil {
-			rnr.WriteModelError(l, w, err)
-			return
-		}
-
-		// resource not found
-		if len(playerCharacterRecs) == 0 {
-			l.Warn("Record player ID >%s< character ID >%s< not found", playerID, characterID)
-			rnr.WriteNotFoundError(l, w, characterID)
-			return
-		}
-
-		playerCharacterRec := playerCharacterRecs[0]
-
 		characterRec, err := m.(*model.Model).GetCharacterRec(characterID, false)
 		if err != nil {
 			rnr.WriteModelError(l, w, err)
@@ -153,9 +115,6 @@ func (rnr *Runner) GetPlayerCharactersHandler(w http.ResponseWriter, r *http.Req
 
 		// Character records
 		characterRecs = append(characterRecs, characterRec)
-
-		// Player character records
-		playerCharacterRecs = append(playerCharacterRecs, playerCharacterRec)
 
 	} else {
 
@@ -167,44 +126,20 @@ func (rnr *Runner) GetPlayerCharactersHandler(w http.ResponseWriter, r *http.Req
 			params[paramName] = paramValue
 		}
 
-		queryCharacterRecs, err := m.(*model.Model).GetCharacterRecs(params, nil, false)
+		characterRecs, err = m.(*model.Model).GetCharacterRecs(params, nil, false)
 		if err != nil {
 			rnr.WriteModelError(l, w, err)
 			return
 		}
 
-		for _, characterRec := range queryCharacterRecs {
-
-			// query parameters
-			params := map[string]interface{}{
-				"character_id": characterRec.ID,
-				"player_id":    playerID,
-			}
-
-			queryPlayerCharacterRecs, err := m.(*model.Model).GetPlayerCharacterRecs(params, nil, false)
-			if err != nil {
-				rnr.WriteModelError(l, w, err)
-				return
-			}
-
-			if len(queryPlayerCharacterRecs) == 1 {
-				// Character records
-				characterRecs = append(characterRecs, characterRec)
-
-				// Player character records
-				playerCharacterRecs = append(playerCharacterRecs, queryPlayerCharacterRecs[0])
-			}
-		}
 	}
 
 	// assign response properties
 	data := []schema.CharacterData{}
-	for idx, characterRec := range characterRecs {
-
-		playerCharacterRec := playerCharacterRecs[idx]
+	for _, characterRec := range characterRecs {
 
 		// response data
-		responseData, err := rnr.RecordToCharacterResponseData(playerCharacterRec, characterRec)
+		responseData, err := rnr.RecordToCharacterResponseData(characterRec)
 		if err != nil {
 			rnr.WriteSystemError(l, w, err)
 			return
@@ -245,6 +180,7 @@ func (rnr *Runner) PostPlayerCharactersHandler(w http.ResponseWriter, r *http.Re
 
 	// Assign request properties
 	characterRec.ID = characterID
+	characterRec.PlayerID = playerID
 
 	// Record data
 	err = rnr.CharacterRequestDataToRecord(req.Data, &characterRec)
@@ -253,31 +189,14 @@ func (rnr *Runner) PostPlayerCharactersHandler(w http.ResponseWriter, r *http.Re
 		return
 	}
 
-	// Default character type to player character
-	if characterRec.CharacterType == "" {
-		l.Info("Defaulting character type to >%s<", record.CharacterTypePlayerMage)
-		characterRec.CharacterType = record.CharacterTypePlayerMage
-	}
-
 	err = m.(*model.Model).CreateCharacterRec(&characterRec)
 	if err != nil {
 		rnr.WriteModelError(l, w, err)
 		return
 	}
 
-	playerCharacterRec := record.PlayerCharacter{
-		CharacterID: characterRec.ID,
-		PlayerID:    playerID,
-	}
-
-	err = m.(*model.Model).CreatePlayerCharacterRec(&playerCharacterRec)
-	if err != nil {
-		rnr.WriteModelError(l, w, err)
-		return
-	}
-
 	// Response data
-	responseData, err := rnr.RecordToCharacterResponseData(&playerCharacterRec, &characterRec)
+	responseData, err := rnr.RecordToCharacterResponseData(&characterRec)
 	if err != nil {
 		rnr.WriteSystemError(l, w, err)
 		return
@@ -309,26 +228,6 @@ func (rnr *Runner) PutPlayerCharactersHandler(w http.ResponseWriter, r *http.Req
 
 	// Player character record
 	l.Info("Getting player ID >%s< character ID >%s< record ", playerID, characterID)
-
-	playerCharacterRecs, err := m.(*model.Model).GetPlayerCharacterRecs(
-		map[string]interface{}{
-			"player_id":    playerID,
-			"character_id": characterID,
-		},
-		nil, false)
-	if err != nil {
-		rnr.WriteModelError(l, w, err)
-		return
-	}
-
-	// resource not found
-	if len(playerCharacterRecs) == 0 {
-		l.Warn("Record player ID >%s< character ID >%s< not found", playerID, characterID)
-		rnr.WriteNotFoundError(l, w, characterID)
-		return
-	}
-
-	playerCharacterRec := playerCharacterRecs[0]
 
 	characterRec, err := m.(*model.Model).GetCharacterRec(characterID, false)
 	if err != nil {
@@ -364,7 +263,7 @@ func (rnr *Runner) PutPlayerCharactersHandler(w http.ResponseWriter, r *http.Req
 	}
 
 	// Response data
-	responseData, err := rnr.RecordToCharacterResponseData(playerCharacterRec, characterRec)
+	responseData, err := rnr.RecordToCharacterResponseData(characterRec)
 	if err != nil {
 		rnr.WriteSystemError(l, w, err)
 		return
@@ -399,11 +298,11 @@ func (rnr *Runner) CharacterRequestDataToRecord(data schema.CharacterData, rec *
 }
 
 // RecordToCharacterResponseData -
-func (rnr *Runner) RecordToCharacterResponseData(playerCharacterRec *record.PlayerCharacter, characterRec *record.Character) (schema.CharacterData, error) {
+func (rnr *Runner) RecordToCharacterResponseData(characterRec *record.Character) (schema.CharacterData, error) {
 
 	data := schema.CharacterData{
 		ID:               characterRec.ID,
-		CharacterType:    characterRec.CharacterType,
+		PlayerID:         characterRec.PlayerID,
 		Name:             characterRec.Name,
 		Avatar:           characterRec.Avatar,
 		Strength:         characterRec.Strength,
@@ -414,12 +313,6 @@ func (rnr *Runner) RecordToCharacterResponseData(playerCharacterRec *record.Play
 		Coins:            characterRec.Coins,
 		CreatedAt:        characterRec.CreatedAt,
 		UpdatedAt:        characterRec.UpdatedAt.Time,
-	}
-
-	// Add player ID when character type is player mage or player familliar
-	if (characterRec.CharacterType == record.CharacterTypePlayerMage ||
-		characterRec.CharacterType == record.CharacterTypePlayerFamilliar) && playerCharacterRec != nil {
-		data.PlayerID = playerCharacterRec.PlayerID
 	}
 
 	return data, nil

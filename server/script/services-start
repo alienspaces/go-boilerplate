@@ -2,7 +2,7 @@
 
 # Local development run script
 
-# environment
+# Environment
 if [ -z "$APP_SERVER_GO_VERSION" ]; then
     source ${BASH_SOURCE%/*}/environment || exit $?
 fi

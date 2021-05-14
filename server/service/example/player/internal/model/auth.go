@@ -14,11 +14,11 @@ import (
 
 // AuthData - encapsulates data provided by an authorizer
 type AuthData struct {
-	Provider         string
-	ProviderPlayerID string
-	ProviderToken    string
-	PlayerEmail      string
-	PlayerName       string
+	Provider          string
+	ProviderAccountID string
+	ProviderToken     string
+	PlayerEmail       string
+	PlayerName        string
 }
 
 // AuthTokenData - encapsulates previously authorised token data
@@ -48,22 +48,22 @@ func (m *Model) AuthVerify(data AuthData) (*record.Player, error) {
 	}
 
 	m.Log.Info("Verifying provider >%s<", data.Provider)
-	m.Log.Info("Verifying account  >%s<", data.ProviderPlayerID)
+	m.Log.Info("Verifying account  >%s<", data.ProviderAccountID)
 	m.Log.Info("Verifying token    >%s<", data.ProviderToken)
 
 	switch data.Provider {
-	case record.PlayerProviderAnonymous:
+	case record.AccountProviderAnonymous:
 		// Anonymous verification requires an account ID only
-		if data.ProviderPlayerID == "" {
-			msg := "missing ProviderPlayerID, cannot verify anonymous authen"
+		if data.ProviderAccountID == "" {
+			msg := "missing ProviderAccountID, cannot verify anonymous authen"
 			m.Log.Warn(msg)
 			return nil, fmt.Errorf(msg)
 		}
-		verifiedPlayerID = data.ProviderPlayerID
-	case record.PlayerProviderGoogle:
+		verifiedPlayerID = data.ProviderAccountID
+	case record.AccountProviderGoogle:
 		// Google verification with server to server token verification
-		if data.ProviderPlayerID == "" {
-			msg := "missing ProviderPlayerID, cannot verify Google authen"
+		if data.ProviderAccountID == "" {
+			msg := "missing ProviderAccountID, cannot verify Google authen"
 			m.Log.Warn(msg)
 			return nil, fmt.Errorf(msg)
 		}
@@ -73,7 +73,7 @@ func (m *Model) AuthVerify(data AuthData) (*record.Player, error) {
 			return nil, fmt.Errorf(msg)
 		}
 
-		verifiedData, err := m.AuthVerifyTokenFunc(record.PlayerProviderGoogle, data.ProviderToken)
+		verifiedData, err := m.AuthVerifyTokenFunc(record.AccountProviderGoogle, data.ProviderToken)
 		if err != nil {
 			m.Log.Warn("Failed AuthVerifyTokenFunc >%v<", err)
 			return nil, err
@@ -87,7 +87,7 @@ func (m *Model) AuthVerify(data AuthData) (*record.Player, error) {
 		m.Log.Info("Token info UserId>%s<", verifiedData.UserID)
 		m.Log.Info("Token info Email >%s<", verifiedData.Email)
 
-		if data.ProviderPlayerID == verifiedData.UserID {
+		if data.ProviderAccountID == verifiedData.UserID {
 			verifiedPlayerID = verifiedData.UserID
 			verifiedPlayerEmail = verifiedData.Email
 			// Google token verification does not return an account name
@@ -134,10 +134,10 @@ func (m *Model) AuthVerify(data AuthData) (*record.Player, error) {
 	if len(accountRecs) == 0 {
 		m.Log.Info("Failed getting user account, records >%d<", len(accountRecs))
 		rec = &record.Player{
-			Name:             verifiedPlayerName,
-			Email:            verifiedPlayerEmail,
-			Provider:         data.Provider,
-			ProviderPlayerID: verifiedPlayerID,
+			Name:              verifiedPlayerName,
+			Email:             verifiedPlayerEmail,
+			Provider:          data.Provider,
+			ProviderAccountID: verifiedPlayerID,
 		}
 		err := m.CreatePlayerRec(rec)
 		if err != nil {
@@ -202,7 +202,7 @@ func (m *Model) authVerifyToken(provider, token string) (*VerifiedData, error) {
 	verifiedData := &VerifiedData{}
 
 	switch provider {
-	case record.PlayerProviderGoogle:
+	case record.AccountProviderGoogle:
 
 		// API key
 		apiKey := m.Config.Get("APP_SERVER_GOOGLE_API_KEY")

@@ -20,7 +20,7 @@ echo
 # copy development env
 cp .env.development .env
 
-# environment
+# Environment
 source ${BASH_SOURCE%/*}/environment || exit $?
 
 # server

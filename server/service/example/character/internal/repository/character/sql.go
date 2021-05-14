@@ -3,7 +3,7 @@ package character
 var createOneSQL = `
 INSERT INTO character (
 	id,
-	character_type,
+	player_id,
 	name,
 	avatar,
 	strength,
@@ -15,7 +15,7 @@ INSERT INTO character (
 	created_at
 ) VALUES (
 	:id,
-	:character_type,
+	:player_id,
 	:name,
 	:avatar,
 	:strength,
@@ -32,7 +32,7 @@ RETURNING *
 var updateOneSQL = `
 UPDATE character SET
 	id                = :id,
-	character_type    = :character_type,      
+	player_id         = :player_id,
     name              = :name,
     avatar            = :avatar,
     strength          = :strength,

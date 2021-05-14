@@ -19,9 +19,7 @@ func (rnr *Runner) LoadSeedData(c *cli.Context) error {
 			// Mage - Dark Armoured
 			{
 				Record: record.Character{
-					CharacterType:   record.CharacterTypeStarterMage,
 					Name:         "Dark Armoured",
-					Avatar:       record.MageAvatarDarkArmoured,
 					Strength:     16,
 					Dexterity:    12,
 					Intelligence: 10,
@@ -31,9 +29,7 @@ func (rnr *Runner) LoadSeedData(c *cli.Context) error {
 			// Mage - Red Stripe Druid
 			{
 				Record: record.Character{
-					CharacterType:   record.CharacterTypeStarterMage,
 					Name:         "Druid",
-					Avatar:       record.MageAvatarRedStripeDruid,
 					Strength:     14,
 					Dexterity:    14,
 					Intelligence: 10,
@@ -43,9 +39,7 @@ func (rnr *Runner) LoadSeedData(c *cli.Context) error {
 			// Mage - Red Fairy
 			{
 				Record: record.Character{
-					CharacterType:   record.CharacterTypeStarterMage,
 					Name:         "Fairy",
-					Avatar:       record.MageAvatarRedFairy,
 					Strength:     10,
 					Dexterity:    14,
 					Intelligence: 14,
@@ -55,9 +49,7 @@ func (rnr *Runner) LoadSeedData(c *cli.Context) error {
 			// Mage - Red Stripe Necromancer
 			{
 				Record: record.Character{
-					CharacterType:   record.CharacterTypeStarterMage,
 					Name:         "Necromancer",
-					Avatar:       record.MageAvatarRedStripeNecromancer,
 					Strength:     14,
 					Dexterity:    10,
 					Intelligence: 14,
@@ -67,9 +59,7 @@ func (rnr *Runner) LoadSeedData(c *cli.Context) error {
 			// Mage - Green Elven
 			{
 				Record: record.Character{
-					CharacterType:   record.CharacterTypeStarterMage,
 					Name:         "Elven",
-					Avatar:       record.MageAvatarGreenElven,
 					Strength:     12,
 					Dexterity:    14,
 					Intelligence: 12,
@@ -79,9 +69,7 @@ func (rnr *Runner) LoadSeedData(c *cli.Context) error {
 			// Familliar - Brown Cyclops Bat
 			{
 				Record: record.Character{
-					CharacterType:   record.CharacterTypeStarterFamilliar,
 					Name:         "Brown Cyclops Bat",
-					Avatar:       record.FamilliarAvatarBrownCyclopsBat,
 					Strength:     10,
 					Dexterity:    10,
 					Intelligence: 10,
@@ -90,9 +78,7 @@ func (rnr *Runner) LoadSeedData(c *cli.Context) error {
 			// Familliar - Brown Yeti
 			{
 				Record: record.Character{
-					CharacterType:   record.CharacterTypeStarterFamilliar,
 					Name:         "Brown Yeti",
-					Avatar:       record.FamilliarAvatarBrownYeti,
 					Strength:     10,
 					Dexterity:    10,
 					Intelligence: 10,
@@ -101,9 +87,7 @@ func (rnr *Runner) LoadSeedData(c *cli.Context) error {
 			// Familliar - Green Tribble
 			{
 				Record: record.Character{
-					CharacterType:   record.CharacterTypeStarterFamilliar,
 					Name:         "Green Tribble",
-					Avatar:       record.FamilliarAvatarGreenTribble,
 					Strength:     10,
 					Dexterity:    10,
 					Intelligence: 10,
@@ -112,9 +96,7 @@ func (rnr *Runner) LoadSeedData(c *cli.Context) error {
 			// Familliar - Grey Cyclops
 			{
 				Record: record.Character{
-					CharacterType:   record.CharacterTypeStarterFamilliar,
 					Name:         "Grey Cyclops",
-					Avatar:       record.FamilliarAvatarGreyCyclops,
 					Strength:     10,
 					Dexterity:    10,
 					Intelligence: 10,
@@ -123,9 +105,7 @@ func (rnr *Runner) LoadSeedData(c *cli.Context) error {
 			// Familliar - Orange Spotted Tribble
 			{
 				Record: record.Character{
-					CharacterType:   record.CharacterTypeStarterFamilliar,
 					Name:         "Orange Spotten Tribble",
-					Avatar:       record.FamilliarAvatarOrangeSpottedTribble,
 					Strength:     10,
 					Dexterity:    10,
 					Intelligence: 10,
@@ -134,9 +114,7 @@ func (rnr *Runner) LoadSeedData(c *cli.Context) error {
 			// Familliar - Purple Bat
 			{
 				Record: record.Character{
-					CharacterType:   record.CharacterTypeStarterFamilliar,
 					Name:         "Purple Bat",
-					Avatar:       record.FamilliarAvatarPurpleBat,
 					Strength:     10,
 					Dexterity:    10,
 					Intelligence: 10,
@@ -145,9 +123,7 @@ func (rnr *Runner) LoadSeedData(c *cli.Context) error {
 			// Familliar - Purple Minotaur
 			{
 				Record: record.Character{
-					CharacterType:   record.CharacterTypeStarterFamilliar,
 					Name:         "Purple Minotaur",
-					Avatar:       record.FamilliarAvatarPurpleMinotaur,
 					Strength:     10,
 					Dexterity:    10,
 					Intelligence: 10,

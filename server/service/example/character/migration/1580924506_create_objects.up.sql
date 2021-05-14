@@ -10,7 +10,7 @@ CREATE TABLE "character" (
   "attribute_points"  int NOT NULL DEFAULT 0,
   "experience_points" bigint NOT NULL DEFAULT 0,
   "coins"             bigint NOT NULL DEFAULT 0,
-  "created_at" timestamp NOT NULL DEFAULT (current_timestamp),
-  "updated_at" timestamp DEFAULT null,
-  "deleted_at" timestamp DEFAULT null
+  "created_at"        timestamp NOT NULL DEFAULT (current_timestamp),
+  "updated_at"        timestamp DEFAULT null,
+  "deleted_at"        timestamp DEFAULT null
 );

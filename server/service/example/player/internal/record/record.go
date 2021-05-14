@@ -4,14 +4,14 @@ import (
 	"gitlab.com/alienspaces/go-boilerplate/server/core/repository"
 )
 
-// PlayerProvider - Valid account providers
+// AccountProvider - Valid account providers
 const (
-	PlayerProviderAnonymous string = "anonymous"
-	PlayerProviderApple     string = "apple"
-	PlayerProviderFacebook  string = "facebook"
-	PlayerProviderGithub    string = "github"
-	PlayerProviderGoogle    string = "google"
-	PlayerProviderTwitter   string = "twitter"
+	AccountProviderAnonymous string = "anonymous"
+	AccountProviderApple     string = "apple"
+	AccountProviderFacebook  string = "facebook"
+	AccountProviderGithub    string = "github"
+	AccountProviderGoogle    string = "google"
+	AccountProviderTwitter   string = "twitter"
 )
 
 // Player -
@@ -20,7 +20,7 @@ type Player struct {
 	Name              string `db:"name"`
 	Email             string `db:"email"`
 	Provider          string `db:"provider"`
-	ProviderPlayerID string `db:"provider_account_id"`
+	ProviderAccountID string `db:"provider_account_id"`
 }
 
 // PlayerRole - Valid roles
@@ -32,6 +32,6 @@ const (
 // PlayerRole -
 type PlayerRole struct {
 	repository.Record
-	PlayerID string `db:"account_id"`
-	Role      string `db:"role"`
+	PlayerID string `db:"player_id"`
+	Role     string `db:"role"`
 }

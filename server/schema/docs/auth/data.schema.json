@@ -29,18 +29,18 @@
             "description": "Authentication token from provider",
             "type": "string"
         },
-        "account_id": {
-            "description": "Local account identifier",
+        "player_id": {
+            "description": "Local player identifier",
             "type": "string",
             "format": "uuid",
             "example": "a87feca8-d6f0-4794-98c7-037b30219520"
         },
-        "account_name": {
-            "description": "Local account name",
+        "player_name": {
+            "description": "Local player name",
             "type": "string"
         },
-        "account_email": {
-            "description": "Local account email",
+        "player_email": {
+            "description": "Local player email",
             "type": "string",
             "format": "email"
         },

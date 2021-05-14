@@ -19,8 +19,7 @@ type CharacterRequest struct {
 // CharacterData -
 type CharacterData struct {
 	ID               string    `json:"id,omitempty"`
-	CharacterType       string    `json:"entity_type,omitempty"`
-	PlayerID        string    `json:"account_id,omitempty"`
+	PlayerID         string    `json:"player_id,omitempty"`
 	Name             string    `json:"name"`
 	Avatar           string    `json:"avatar"`
 	Strength         int       `json:"strength"`

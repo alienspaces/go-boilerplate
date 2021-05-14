@@ -6,14 +6,14 @@ INSERT INTO player (
     name,
     email,
     provider,
-    provider_player_id,
+    provider_account_id,
     created_at
 ) VALUES (
     :id,
     :name,
     :email,
     :provider,
-    :provider_player_id,
+    :provider_account_id,
     :created_at
 )
 RETURNING *
@@ -24,7 +24,7 @@ UPDATE player SET
     name                = :name,
     email               = :email,
     provider            = :provider,
-    provider_player_id = :provider_player_id,
+    provider_account_id = :provider_account_id,
     updated_at          = :updated_at
 WHERE id = :id
 AND   deleted_at IS NULL

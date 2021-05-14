@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# environment
+# Environment
 source ${BASH_SOURCE%/*}/environment || exit $?
 
 # retry

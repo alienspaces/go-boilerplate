@@ -8,49 +8,26 @@ import (
 	"gitlab.com/alienspaces/go-boilerplate/server/service/character/internal/record"
 )
 
-func (t *Testing) createCharacterRec(entityConfig CharacterConfig) (record.Character, error) {
+func (t *Testing) createCharacterRec(chracterConfig CharacterConfig) (record.Character, error) {
 
-	entityRec := entityConfig.Record
+	chracterRec := chracterConfig.Record
 
-	if entityRec.CharacterType == "" {
-		entityRec.CharacterType = record.CharacterTypePlayerMage
+	if chracterRec.PlayerID == "" {
+		playerID, _ := uuid.NewRandom()
+		chracterRec.PlayerID = playerID.String()
 	}
 
-	if entityRec.Name == "" {
-		entityRec.Name = gofakeit.Name()
-	}
-	if entityRec.Avatar == "" {
-		entityRec.Avatar = record.MageAvatarRedStripeDruid
+	if chracterRec.Name == "" {
+		chracterRec.Name = gofakeit.Name()
 	}
 
-	t.Log.Info("Creating entity testing record >%#v<", entityRec)
+	t.Log.Info("Creating chracter testing record >%#v<", chracterRec)
 
-	err := t.Model.(*model.Model).CreateCharacterRec(&entityRec)
+	err := t.Model.(*model.Model).CreateCharacterRec(&chracterRec)
 	if err != nil {
-		t.Log.Warn("Failed creating testing entity record >%v<", err)
-		return entityRec, err
+		t.Log.Warn("Failed creating testing chracter record >%v<", err)
+		return chracterRec, err
 	}
 
-	return entityRec, nil
-}
-
-func (t *Testing) createPlayerCharacterRec(entityRec record.Character, accountCharacterConfig PlayerCharacterConfig) (record.PlayerCharacter, error) {
-
-	accountCharacterRec := accountCharacterConfig.Record
-
-	t.Log.Info("Creating account entity testing record >%#v<", accountCharacterRec)
-
-	if accountCharacterRec.PlayerID == "" {
-		accountID, _ := uuid.NewRandom()
-		accountCharacterRec.PlayerID = accountID.String()
-	}
-	accountCharacterRec.CharacterID = entityRec.ID
-
-	err := t.Model.(*model.Model).CreatePlayerCharacterRec(&accountCharacterRec)
-	if err != nil {
-		t.Log.Warn("Failed creating testing account entity record >%v<", err)
-		return accountCharacterRec, err
-	}
-
-	return accountCharacterRec, nil
+	return chracterRec, nil
 }

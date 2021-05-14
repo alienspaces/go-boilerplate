@@ -18,7 +18,7 @@ echo
 # copy development env
 cp .env.development .env
 
-# environment
+# Environment
 source ${BASH_SOURCE%/*}/environment || exit $?
 
 # reset APP_SERVER_PORT as each service should define
