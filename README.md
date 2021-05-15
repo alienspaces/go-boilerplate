@@ -2,6 +2,8 @@
 
 Contains *mostly* everything you need to get started building a set of independent fully functional Go REST API's.
 
+As this is a **boilerplate** with supporting scripts and configuration files it is highly opinionated. As such, I won't feel bad if you don't like it, and neither should you 👍
+
 ## Overview
 
 - Every source directory is documented
