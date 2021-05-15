@@ -161,4 +161,8 @@ Migrate down:
 
 ## TODO
 
-- Documentation
+- Fulfill the documentation promise
+- Add `./core/server/middleware` directory
+- Add architecture diagrams
+- Demonstrate interfaces/mocks for models and repositories and how tests might make use of them
+- Add support for event publishing and subscribing
