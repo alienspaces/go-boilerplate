@@ -41,6 +41,39 @@ Contains *mostly* everything you need to get started building a set of independe
   - [https://www.postgresql.org/download/macosx/](https://www.postgresql.org/download/macosx/)
   - [https://www.postgresql.org/download/linux/ubuntu/](https://www.postgresql.org/download/linux/ubuntu/)
 
+## Running
+
+Start all services:
+
+```bash
+./script/start
+```
+
+### Examples API Documentation
+
+- [Player](http://localhost:8082/players/documentation)
+- [Characters](http://localhost:8082/characters/documentation)
+
+Stop all services:
+
+```bash
+./script/stop
+```
+
+## Testing
+
+Test all packages:
+
+```bash
+./script/test
+```
+
+Test specific service:
+
+```bash
+./script/test-service ./service/example/player
+```
+
 ## Generators
 
 Generator scripts are available for creating new services based on the existing `./service/template` service.
@@ -91,39 +124,6 @@ Migrate down:
 
 ```bash
 ./script/db-migrate-down
-```
-
-## Testing
-
-Test all packages:
-
-```bash
-./script/test
-```
-
-Test specific service:
-
-```bash
-./script/test-service ./service/example/player
-```
-
-## Running
-
-Start all services:
-
-```bash
-./script/start
-```
-
-### Examples API Documentation
-
-- [Player](http://localhost:8082/players/documentation)
-- [Characters](http://localhost:8082/characters/documentation)
-
-Stop all services:
-
-```bash
-./script/stop
 ```
 
 ## Upgrading Go Version
