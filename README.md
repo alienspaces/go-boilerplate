@@ -1,13 +1,11 @@
 # Go Boilerplate
 
-Contains *mostly* everything you need to get started building a set of independent fully functional Go REST API's.
+Contains *mostly* everything you might need to build a set of independent REST API's in Go.
 
 As this is a **boilerplate** with supporting scripts and configuration files it is highly opinionated. As such, I won't feel bad if you don't like it, and neither should you 👍
 
 ## Overview
 
-- Every source directory is documented
-- Every source file is documented
 - Layered architecture
   - Application
   - Model
@@ -30,6 +28,32 @@ As this is a **boilerplate** with supporting scripts and configuration files it 
 - Developer `./scripts` for the *most common* development tasks
 - Gitlab CI integration
 - Kubernetes deployment configuration
+
+## Documentation
+
+Best practice:
+
+- All source directories are documented
+- All source files are documented
+
+Within each directory there will be a `README.md` document of a standard format.
+
+```bash
+# /directory/path
+
+An explanation of why this directory exists and its contents.
+
+## Sub-Directories
+
+| Directory | Description         |
+| --------- | ------------------- |
+| ./next    | Short description.. |
+
+```
+
+Where possible all source files will be documented according to the standard for that source files language.
+
+Otherwise, as close to the top of the file as possible will be a description, along with all variables and functions documented when necessary.
 
 ## Prerequisites
 
