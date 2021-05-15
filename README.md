@@ -43,7 +43,7 @@ Within each directory there will be a `README.md` document of a standard format.
 
 An explanation of why this directory exists and its contents.
 
-## Sub-Directories
+## Subdirectories
 
 | Directory | Description         |
 | --------- | ------------------- |
